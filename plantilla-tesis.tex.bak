@@ -1,0 +1,702 @@
+\batchmode
+\makeatletter
+\def\input@path{{style/}{sections/}{pdf/}{logos/}}
+\makeatother
+\documentclass[]{beamer}
+
+
+%-------------------------------------------------------
+% Inclusi\'{o}n de paquetes
+%-------------------------------------------------------
+%\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}Title}}
+%\usepackage{lipsum-es}
+%\usepackage[latin9]{inputenc}
+%\usepackage[ansinew]{inputenc}
+%--------------------------------
+%
+\usepackage{ifthen}
+\usepackage[T1]{fontenc}
+\usepackage[mathletters]{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,spanish,es-tabla]{babel}
+\uselanguage{spanish}
+\languagepath{spanish}
+\usepackage{environ}
+\usepackage{lmodern}
+\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+%\usepackage[spanish]{babel}
+\usepackage{times}
+
+
+
+%---------------------------------
+\usepackage{amssymb,amsfonts,latexsym,cancel,stmaryrd}%
+\usepackage[ruled,,vlined,lined,linesnumbered]{algorithm2e}
+\usepackage{framed}
+\usepackage{mathptmx}
+\usepackage{helvet}
+%\linespread{1.05}
+\usepackage[full]{textcomp}                        % Caracteres especiales como ' (recto)
+\usepackage{amsmath}
+\makeatletter
+\let\@tmp\@xfloat
+\usepackage{fixltx2e}
+\let\@xfloat\@tmp
+\makeatother
+\makeatletter
+\let\th@plain\relax
+\makeatother
+\theoremstyle{plain}
+\let\openbox\relax
+%\usepackage{ntheorem}
+\let\proofname\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+%\usepackage{ddot}
+%\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{epsfig}
+%\usepackage{amscd}
+\usepackage{longtable}
+%\usepackage{latexcad}
+\usepackage{fancybox}
+\graphicspath{{ps/}{logos/}{figuras/}{sections/Figures/}}
+\listfiles
+% COMANDOS PERSONALES   ----------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\raya}{\rule{2cm}{0.01cm}\\}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\sen}{\mathop{\rm sen}\nolimits}
+\newcommand{\senh}{\mathop{\rm senh}\nolimits}
+\newcommand{\arcsen}{\mathop{\rm arcsen}\nolimits}
+\newcommand{\arcsec}{\mathop{\rm arcsec}\nolimits}
+%\def\sen{\mathop{\mbox{\normalfont sen}}\nolimits}
+\def\max{\mathop{\mbox{\normalfont m\’ax}}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+%----------- cargando el Tema Tesis
+\DeclareGraphicsExtensions{.eps,.jpg,.png, .bmp}
+
+
+\usetheme[]{Tesis}%%% opci\'{o}n para el tema outher.
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (Movimiento por defecto)
+
+% Si desea cambiar los colores de los diversos elementos en el tema, edite y descomente las siguientes l\'{\i}neas
+
+% Para cambiar los colores de la barra:
+%\setbeamercolor{Tesis}{fg=red!20,bg=red}
+
+% Para cambiar los colores de la estructura:
+%\setbeamercolor{structure}{fg=red}
+
+%Para cambiar el color del texto de la caja del titulo:
+%\setbeamercolor{frametitle}{fg=blue}
+
+%Para cambiar el color del texto y del fondo:
+%\definecolor{azultext}{RGB}{43,93,156}
+
+%-------------------------------------------------------
+% Definiendo y redefiniendo comandos y entornos
+%-------------------------------------------------------
+
+% colores de los hiperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+%\setbeamertemplate{headline}[text line]{\insertsectionnavigationhorizontal{\paperwidth}{}{}}
+%-------------------------------------------------------
+% Informacio\'{o}n de la p\'{a}gina del titulo
+%-------------------------------------------------------
+%%% configuracion del tema %%%%%%%%%%%%%%%%%%%5
+\makeatletter
+  \definecolor{beamer@barcolor}{RGB}{21,46,128}%azul
+  \definecolor{beamer@headercolor}{RGB}{226,107,59}%naranja
+\makeatother
+\newcommand{\cdefault}[4][named]{\begin{tikzpicture}
+\fill[#2,draw=negro] (0,0) rectangle ++(2,1);
+\node[below] at (1,0) {#2};
+\node[below=4mm] at (1,0) {\tiny #3 \{#4\}};
+\node[below=6mm] at (1,0) {\tiny #1};
+\end{tikzpicture}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox\terminalbox
+\lstnewenvironment{terminal}[1][]
+  {\lstset{#1}\setbox\terminalbox=\vbox\bgroup\hsize=0.7\textwidth}
+  {\egroup
+   \tikzstyle{terminal} = [
+    draw=white, text=white, font=courier, fill=blue!20, very thick,
+    rectangle, inner sep=10pt, inner ysep=20pt
+   ]
+   \tikzstyle{terminalTitle} = [
+     fill=red!20, text=white, font=\ttfamily, draw=white
+   ]
+   \begin{tikzpicture}
+   \node [terminal] (box){\usebox{\terminalbox}};
+   \node[terminalTitle, rounded corners, right=10pt] at (box.north west) {tty: /bin/bash};
+   \end{tikzpicture}
+}
+%%%%%%%%%%------------------------------------%%%%%%%%%%
+\newenvironment{slides}[1]
+{\begin{frame}[fragile,allowframebreaks, environment=slides]{#1}}
+{\end{frame}}
+
+%%%%%%%%%%%-------------------------------%%%%%%%%%%%%%%
+%------------------------------------
+\titulogrado{Magister}
+\director{\footnotesize Dr: Jorge Rodr\'{\i}guez\\ {\footnotesize jorge.jrodri@gmail.com}}
+\institutedirector{Universidad del Atl\'antico}
+\author[aarroyo]{Ang\'{e}lica Arroyo\\ {\footnotesize angelicarroyo1020@gmail.com}}
+\institute{Universidad del Atl\'antico}
+\title[aaa]{Acotaci\'{o}n de Soluciones e Integrales de Darboux en un }
+\subtitle{\Huge  Sistema Particular del Circuito de Chua}
+\date{Julio 2016}
+%\subtitle{Linguistics as a Window for Understanding the Brain}
+\titlegraphic{\includegraphics[scale=0.16]{2}}
+
+%-------------------------------------------------------
+% Cuerpo de la presentaci\'{o}n
+%-------------------------------------------------------
+
+\begin{document}
+%-------------------------------------------------------
+% La p\'{a}gina del t\'{\i}tulo
+%-------------------------------------------------------
+
+
+\begin{frame}[plain,noframenumbering] % la opci\'{o}n plain elimina la cabecera de la p\'{a}gina de t\'{\i}tulo, noframenumbering quita la numeraci\'{o}n unicamente de esta diapositiva
+  \titlepage % coloca aqu\'{\i}  la informaci\'{o}n de la p\'{a}gina que se estipul\'{o} antes.
+\end{frame}
+
+
+\begin{frame}{Contenido}{}
+\tableofcontents
+\end{frame}
+
+\section{Introducci\'{o}n}
+\begin{slides}{Introducci\'{o}n}
+El {\bf Circuito de Chua} es un circuito electr\'{o}nico simple que exhibe el comportamiento ca\'{o}tico cl\'{a}sico. Fue introducido en 1983 por Leon Ong Chua. A causa de la facilidad de construcci\'{o}n del circuito, se ha convertido en un ejemplo com\'{u}n de un sistema ca\'{o}tico, y algunos lo han declarado \textquotedblleft un paradigma de caos\textquotedblright.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.4]{chua.jpg}
+\caption[titulo:]{\scriptsize{Circuito de Chua}} \label{fig1}
+\end{center}
+\end{figure}
+
+El Circuito de Chua, es analizado por ser una red el\'ectrica simple que exhibe una variedad de fen\'omenos de bifurcaciones y atractores.\\
+Al aplicar las leyes de Kirchhoff al Circuito de Chua de la figura anterior, y teniendo en cuenta las variables se\~{n}aladas en el esquema, se obtienen las siguientes ecuaciones que describen su comportamiento:\\
+
+\begin{eqnarray}
+\ C_1\frac{dV_{C_1}}{dt}&=&\frac{1}{R_0}(V_{C_2}-V_{C_1})-i_R \\
+\ C_2\frac{dV_{C_2}}{dt}&=&\frac{1}{R_0}(V_{C_1}-V_{C_2})+i_L \\
+\ L\frac{d{i_L}}{dt}&=&-{V_{C_2}}
+\end{eqnarray}\\
+Donde $i_R$ es la funci\'on de respuesta del elemento no lineal. Las variables que surgen en las ecuaciones son la tensi\'on $V_{C_1}$ que aparecen en bornes del condensador de la derecha, la tensi\'on $V_{C_2}$ que aparecen en bornes del condensador izquierdo e $i_L$ que se trata de la intensidad que circula por la bobina.
+Las constantes que aparecen en el sistema de ecuaciones diferenciales son las capacitancias $C_1$ y $C_2$ de los dos condensadores, la inductancia $L$ de la bobina, la resistencia interna $r_0$ de la bobina y la resistencia variable $R_0$ del potenci\'ometro.
+\end{slides}
+
+\begin{slides}{Introducci\'{o}n}
+El Circuito de Chua puede ser modelado a trav\'{e}s de un sistema de tres ecuaciones lineales diferenciales con las variables $x(t)$, $y(t)$, $z(t)$ que representan las tensiones en los condensadores  $C_1$ y $C_2$, y la intensidad de la corriente el\'{e}ctrica en la bobina, respectivamente:
+
+\begin{equation}\label{ang1}
+\begin{cases}
+\frac{dx}{d\tau}=\alpha\big(y-h(x)\big)\\\\
+\frac{dy}{d\tau}=x-y+z\\\\
+\frac{dz}{d\tau}=-\beta y
+\end{cases}
+\end{equation}
+Donde la funci\'on de transferencia $h(x)$ esta dada por:
+\begin{equation*}
+h(x)=
+\begin{cases}
+bx+c-b \quad  &si \quad x\geq 1 \\
+cx \quad &si \quad \mid x \mid < 1\\
+bx-c+b \quad &si \quad x\leq -1
+\end{cases}
+\end{equation*}
+ La forma en el espacio del sistema de ecuaciones diferenciales; se obtienen con los cambios de variable:
+\begin{center}
+$x=\frac{V_{C_1}}{B_P}$;\quad $y=\frac{V_{C_2}}{B_P}$;\quad $z=\frac{R_0i_L}{B_P}$;\quad $\tau=t{R_0}C_2$
+\end{center}
+En este trabajo se presenta un estudio de los fen\'omenos cr\'iticos de un caso particular del Circuito de Chua, el caso en donde la funci\'on de transferencia $h(x)$ esta dada por:
+\begin{equation*}
+h(x)=
+\begin{cases}
+b \quad  &si \quad x\geq 1 \\
+cx \quad &si \quad \mid x \mid < 1\\
+-b \quad &si \quad x\leq -1
+\end{cases}
+\end{equation*}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.3]{gra6.jpg}
+\caption[titulo:]{\scriptsize{Funci\'on de transferencia}} \label{fig2}
+\end{center}
+\end{figure}
+\\
+En este trabajo:
+ \begin{itemize}
+\renewcommand{\labelitemi}{$\star$}
+\item Se construye una funci\'{o}n de Lyapunov para este sistema con la que se demuestra que el \'{u}nico punto de equilibrio es asint\'{o}ticamente estable.
+\item Se construye un superficie esf\'{e}rica en $\mathbb{R}^{3}$ positivamente invariante que encierra al punto cr\'{\i}tico y que tiene la propiedad de que cada recta dirigida desde el origen de coordenadas a la superficie la interseca en uno y solo un punto, tal que toda trayectoria del sistema aut\'{o}nomo la cruza hacia el interior, para $t$ suficientemente grande.
+\item Se estudia la integrabilidad del sistema, calculando la integral primera racional generalizada y demostrando que \'{e}sta es \'{u}nica.
+\end{itemize}
+
+\end{slides}
+
+\section{Funci\'{o}n de Lyapunov}
+%\input{nombre-del-archivo}
+\subsection{Punto de Equilibrio}
+\begin{slides}{Punto de Equilibrio}
+En esta parte caracterizamos el comportamiento cualitativo del sistema de ecuaciones diferenciales no lineal:
+\begin{equation*}
+\begin{cases}
+\frac{dx}{d\tau}=\alpha\big(y - h(x)\big)\\
+\frac{dy}{d\tau}=x-y+z\\
+\frac{dz}{d\tau}=-\beta y
+\end{cases}
+\end{equation*}
+\vspace*{0.8cm}
+
+\noindent donde $h(x)$ esta dada por:
+
+\begin{equation*}
+h(x)=
+\begin{cases}
+b \quad  &si \quad x\geq 1 \\
+cx \quad &si \quad \mid x \mid < 1\\
+-b \quad &si \quad x\leq -1
+\end{cases}
+\end{equation*}
+\noindent
+la funci\'on $h$ es de Lipschitz, $h'$ existe y es continua en un entorno de $0$ y $h'(0)=c>0$, $xh(x)>0$ si $x\neq 0$, $\alpha >0$, $\beta >0$. \\
+\vspace*{0.3cm}
+
+
+\noindent
+El Sistema de Ecuaciones Diferenciales anterior presenta un \'unico punto de equilibrio en $(0,0,0)$ esto es,
+
+\begin{align*}
+\frac{dz}{d \tau}&=0 \Longrightarrow -\beta y=0 \Longrightarrow y=0\\\\
+\frac{dy}{d \tau}&=0 \Longrightarrow x-y+z=0 \Longrightarrow x+z=0 \Longrightarrow x=-z\\\\
+\frac{dx}{d \tau}&=0 \Longrightarrow -\alpha \big(y-h(x)\big)=0  \Longrightarrow y-h(x)=0 \Longrightarrow h(x)=y \Longrightarrow h(x)=0
+\end{align*}
+\vspace*{0.3cm}
+
+\noindent
+Se puede observar en la funci\'{o}n que $h(x)=0$ si $x=0$, luego $(0,0,0)$ es el \'unico punto de equilibrio que presenta el sistema.
+\begin{center}{\bf\underline{{La parte Lineal en el Equilibrio}}}
+\end{center}
+\noindent
+Para el estudio del punto singular linealizamos el sistema y obtenemos:
+\begin{equation}\label{a3}
+\begin{cases}
+\frac{dx}{d\tau}=\alpha y -\alpha cx\\
+\frac{dy}{d\tau}=x-y+z\\
+\frac{dz}{d\tau}=-\beta y
+\end{cases}
+\end{equation}
+
+\vspace*{0.8cm}
+
+\noindent
+La matriz Jacobiana evaluada en $(0,0,0)$ es:
+
+\begin{equation}
+A=
+\begin{pmatrix}
+-\alpha c & \alpha & 0\\
+1 & -1 & 1\\
+0 & -\beta & 0
+\end{pmatrix}
+\end{equation}
+
+\vspace*{0.8cm}
+
+\noindent
+
+Y el polinomio caracter\'istico est\'{a} dado por:
+\begin{equation}\label{b1}
+p(\lambda)= \lambda^3 + (\alpha c +1)\lambda^2 + (\alpha c-\alpha + \beta) \lambda + \alpha \beta c=0
+\end{equation}
+\noindent
+donde $\lambda_1$, $\lambda_2$, $\lambda_3$ son las ra\'ices del polinomio caracter\'istico ($\ref{b1}$),
+las cuales satisfacen:
+
+\begin{equation*}
+\begin{cases}
+A_2 = \lambda_1 + \lambda_2 + \lambda_3 &= -(\alpha c + 1)\\
+A_1 = \lambda_1 \lambda_2  + \lambda_1 \lambda_3 + \lambda_2 \lambda_3 &= \alpha (c-1) + \beta \\
+A_0 = \lambda_1 \lambda_2 \lambda_3 &= -\alpha \beta c
+\end{cases}
+\end{equation*}
+
+\vspace*{0.8cm}
+\noindent
+Donde $A_2$ representa la traza de la matriz Jacobiana, $A_1$ la suma de los menores diagonales de segundo orden y $A_0$ el determinante de la matriz.
+\vspace*{0.8cm}
+Adem\'{a}s, estableciendo el que el par\'ametro $\alpha$ cumpla la siguiente condici\'on:
+
+\begin{equation}\label{b2}
+\alpha c + \beta > \alpha
+\end{equation}
+Se puede ver que los autovalores de la matriz Jacobiana presentan algunas propiedades cuando variamos los par\'ametros $c$, $\alpha$ y $\beta$ positivos:
+\\
+a) Sean $\lambda_1<0$, \quad $\lambda_2=\sigma+i\omega$, \quad $\lambda_3=\sigma-i\omega$ ra\'ices del polinomio caracter\'istico, entonces:
+\begin{itemize}
+\renewcommand{\labelitemi}{$\star$}
+\item $\sigma>0 \Longleftrightarrow (\alpha c + 1)(\alpha c - \alpha + \beta)   < \alpha \beta c$
+\item $\sigma<0 \Longleftrightarrow (\alpha c + 1)(\alpha c - \alpha + \beta) > \alpha \beta c$
+\item $\sigma=0 \Longleftrightarrow (\alpha c + 1)(\alpha c - \alpha + \beta) = \alpha \beta c$
+\end{itemize}
+\noindent
+b) Sean $\lambda_1$, $\lambda_2$, $\lambda_3$ ra\'ices reales, entonces $\lambda_2$ y $\lambda_3$ son negativas y $(\alpha c + 1)(\alpha c - \alpha + \beta) > \alpha \beta c$
+\end{slides}
+\subsection{Construcci\'{o}n de la Funci\'{o}n de Lyapunov}
+\begin{slides}{Construcci\'{o}n de la Funci\'{o}n de Lyapunov}
+La determinaci\'{o}n de la  estabilidad global asint\'{o}tica en los puntos
+de equilibrio de un sistema diferencial ordinario no lineal tiene una importancia especial.
+ \\
+ \\
+Un m\'{e}todo \'{u}til para trabajar este problema de estabilidad es el m\'{e}todo directo de
+Lyapunov, con el cual podemos determinar la estabilidad
+asint\'{o}tica global de nuestro sistema de ecuaciones diferenciales de 3 variables a trav\'{e}s de la construcci\'{o}n y
+estudio de una funci\'{o}n positiva, llamada funci\'{o}n de Lyapunov, \'{e}ste es el objetivo principal en esta secci\'{o}n.
+\\
+\\
+\end{slides}
+\begin{slides}{Construcci\'{o}n de la Funci\'{o}n de Lyapunov}
+El m\'etodo de construcci\'on que se emple\'{o} es una adaptaci\'on de Rodr\'{\i}guez \cite {JRC} y del teorema de Lyapunov que establece la correspondencia entre cada forma cuadr\'atica definida positiva $U(x,y,z)$ y una forma cuadr\'atica positiva $V(x,y,z)$ tal que:
+
+\begin{equation*}
+\dot{V}= -U
+\end{equation*}
+\noindent
+Empezamos con la parte lineal del sistema de ecuaciones, el sistema:
+
+\begin{equation*}
+\begin{cases}
+\frac{dx}{d\tau}=\alpha y - \alpha c x \\
+\frac{dy}{d\tau}=x-y+z\\
+\frac{dz}{d\tau}=-\beta y
+\end{cases}
+\end{equation*}
+
+Donde $\alpha$, $\beta$ y $c$ son constantes que satisfacen las siguientes condiciones:
+\begin{equation}\label{an1}
+(\alpha c + 1)>0 \quad \quad \quad (\alpha c + 1)(\alpha c - \alpha + \beta)> \alpha \beta c >0
+\end{equation}
+
+\vspace*{0.8cm}
+\noindent
+De la ecuaci\'on ($\ref{an1}$) existe una constante $\kappa$ tal que:
+\begin{equation}\label{an2}
+\frac{1}{(\alpha c +1)} < \kappa < \frac{\alpha c -\alpha + \beta}{\alpha \beta c}
+\end{equation}
+
+\vspace*{0.8cm}
+Ahora, sea $V$ una funci\'on definida positiva dada por:
+\begin{equation}
+V= \kappa_1 (Ax + By)^2 + \kappa_2 (Dy + Ez)^2 + \kappa_3 y^2
+\end{equation}
+
+\noindent
+Donde $\kappa_1$, $\kappa_2$, $\kappa_3$, $A$, $B$, $D$, $E$ son constantes positivas, busquemos las constantes de manera que:
+\begin{equation}\label{te1}
+\dot{V}= -U = -(\alpha c - \alpha + \beta - \kappa \alpha \beta c)x^2 - (\kappa(\alpha c + 1)-1)z^2
+\end{equation}
+
+\noindent
+Se puede verificar que $\dot{V}$ es negativa, ya que por ($\ref{an2}$), se tiene:
+\begin{center}
+$\alpha c - \alpha + \beta > \kappa \alpha \beta c$ \quad y \quad $\kappa(\alpha c + 1)> 1$
+\end{center}
+\noindent
+Y por otro lado:
+\begin{equation}\label{te2}
+\begin{split}
+\dot{V} &= (2\kappa_1 AB - 2\kappa_1 A^2 \alpha c) x^2 +( 2 \kappa_1 A^2 \alpha - 2 \kappa_1 AB - 2\kappa_1 AB \alpha c +2\kappa_1 B^2 \\
+&\quad + 2\kappa_2 D^2 + 2\kappa_3)xy +(2 \kappa_1 AB + 2\kappa_2 ED)xz + (2\kappa_1 AB \alpha  -2\kappa_1 B^2 \\
+&\quad - 2\kappa_2 D^2 - 2\kappa_2 ED \beta - 2\kappa_3 )y^2 + (2\kappa_1 B^2 + 2\kappa_2 D^2 - 2\kappa_2 E^2 \beta \\
+&\quad - 2\kappa_2 ED + 2\kappa_3)yz + 2\kappa_2 ED z^2
+\end{split}
+\end{equation}
+
+Entonces, de las ecuaciones ($\ref{te1}$) y ($\ref{te2}$) obtenemos el siguiente sistema:
+\begin{equation*}
+\begin{cases}
+2\kappa_1 AB - 2\kappa_1 A^2 \alpha c=-(\alpha c - \alpha + \beta - \kappa \alpha \beta c) \\
+\kappa_1 A^2 \alpha - \kappa_1 AB - \kappa_1 AB \alpha c + \kappa_1 B^2 + \kappa_2 D^2 + \kappa_3=0\\
+\kappa_1 AB + \kappa_2 ED =0 \\
+\kappa_1 AB \alpha  - \kappa_1 B^2 - \kappa_2 D^2 - \kappa_2 ED \beta - \kappa_3 =0 \\
+\kappa_1 B^2 + \kappa_2 D^2 - \kappa_2 E^2 \beta - \kappa_2 ED + \kappa_3 =0 \\
+2\kappa_2 ED =- (\kappa(\alpha c + 1)-1)
+\end{cases}
+\end{equation*}
+
+
+Resolviendo este sistema de ecuaciones tenemos que:
+\begin{equation*}
+\begin{split}
+2 \kappa_1 &= \frac{1}{\alpha c} \quad \quad 2 \kappa_2 = \frac{1}{\beta c} \\\\
+2 \kappa_3 &= (\alpha + \beta)(\kappa(\alpha c + 1)-1) - \bigg(\frac{\alpha c}{\alpha c - \alpha + \beta - \kappa \alpha \beta c + \kappa(\alpha c + 1)-1} + \\
+&\quad \frac{\beta c}{c(2 + \alpha c)(\kappa(\alpha c + 1)-1) - (\alpha c - \alpha + \beta - \kappa \alpha \beta c + \kappa(\alpha c + 1)-1) }\bigg) \\\\
+A &= \sqrt{\alpha c - \alpha + \beta - \kappa \alpha \beta c + \kappa(\alpha c + 1)-1}\\\\
+B &= \frac{\alpha c (\kappa(\alpha c + 1)-1)}{\sqrt{\alpha c - \alpha + \beta - \kappa \alpha \beta c + \kappa(\alpha c + 1)-1}}\\\\
+E &= \sqrt{c(2 + \alpha c)(\kappa(\alpha c + 1)-1) - (\alpha c - \alpha + \beta - \kappa \alpha \beta c + \kappa(\alpha c + 1)-1)}\\\\
+D &= \frac{-\beta c (\kappa(\alpha c + 1)-1)}{\sqrt{c(2 + \alpha c)(\kappa(\alpha c + 1)-1) - (\alpha c - \alpha + \beta - \kappa \alpha \beta c + \kappa(\alpha c + 1)-1)}}
+\end{split}
+\end{equation*}
+
+
+Por lo tanto, V para el sistema lineal asociado al sistema ($\ref{a1}$) es:
+\begin{equation*}
+\begin{split}
+2V &= \frac{1}{\alpha c} \left(\sqrt{\gamma +\eta} x + \frac{\alpha c \eta}{\sqrt{\gamma +\eta}}y \right)^2 + \frac{1}{\beta c} \left(\sqrt{c(2 + \alpha c)\eta - (\gamma + \eta)}z - \frac{\beta c \eta}{\sqrt{c(2 + \alpha c)\eta - (\gamma + \eta)}}y \right)^2 \\
+&\quad + (\alpha + \beta)\eta - \left(\frac{\alpha c}{\gamma + \eta} + \frac{\beta c}{c(2 + \alpha c)\eta - (\gamma + \eta)}\eta^2 \right)y^2
+\end{split}
+\end{equation*}
+
+Donde:
+\begin{equation*}
+\begin{split}
+\eta &= \kappa(\alpha c + 1)-1 \\
+\gamma &= \alpha c - \alpha + \beta - \kappa \alpha \beta c
+\end{split}
+\end{equation*}
+\vspace*{0.8cm}
+\begin{center}
+{\bf\underline{{Construcción para la parte No Lineal del Sistema}}}
+\end{center}
+Desarrollando las expresiones de V tenemos:
+\begin{equation*}
+\begin{split}
+V &= \frac{1}{2\alpha c} (\gamma +\eta) x^{2} + \eta xy+\frac{1}{2}A y^2- \eta zy + \frac{\Psi}{\beta c}z^2.
+\end{split}
+\end{equation*}
+Con $A=\left(\frac{\alpha c \eta^{2}}{\gamma +\eta}+\frac{\beta c \eta^{2}}{\Psi}+(\alpha + \beta)\eta-\frac{\alpha c}{\gamma + \eta}-\frac{\beta c}{\Psi}\eta^2 \right)$
+\begin{equation*}
+\begin{split}
+V &=\frac{\gamma +\eta}{2\eta\alpha c}\int_0^x2\eta xdx + 2\eta xy+A y^2 - 2\eta zy + \frac{\Psi}{\beta c}z^2
+\end{split}
+\end{equation*}
+Donde:
+\begin{equation*}
+\Psi = c(2 + \alpha c)\eta - (\gamma + \eta)\neq 0
+\end{equation*}
+Por analog\'{\i}a y tomando $h(x)=2\eta x$ , obtenemos la funci\'{o}n de Lyapunov para la parte no lineal del sistema:
+\begin{equation}\label{SU1}
+\begin{split}
+V (x,y,z) &=\frac{\gamma +\eta}{2\eta\alpha c}H(x) + h(x)y+A\phi(y) - 2\eta zy + \frac{\Psi}{\beta c}\varphi(z)
+\end{split}
+\end{equation}
+\\
+Donde:
+$$H(x)=\int_0^xh(x)\, dx\hspace{0.8cm}\phi(y)=\int_0^y y\, dy\hspace{0.8cm}
+\varphi(z)=\int_0^z z\, dz$$
+
+Luego, para $x\geq 0$ y $y> 0$
+\begin{equation*}
+\begin{split}
+\dot{V} (x,y,z) &=\frac{\gamma +\eta}{2\eta\alpha c}H'(x)\displaystyle{\frac{dx}{dt}} + h'(x) y\displaystyle{\frac{dx}{dt}}+ h(x)\displaystyle{\frac{dy}{dt}}+A\phi'(y)\displaystyle{\frac{dy}{dt}} - 2\eta y \displaystyle{\frac{dz}{dt}}\\
+&- 2\eta z \displaystyle{\frac{dy}{dt}} +
+\frac{\Psi}{\beta c}\varphi'(z) \displaystyle{\frac{dz}{dt}}
+\end{split}
+\end{equation*}
+
+\begin{nota}
+$H'(x)=h(x)$ cuando $x\geq 0$ y $H'(x)=-h(x)$ cuando $x\leq 0$
+\end{nota}
+Entonces, $\dot{V}$ para $h(x)=-b$ es igual a $\dot{V}$ para $h(x)=b$ , es decir, debemos analizar si $\dot{V}< 0$ para $(x,y,z)\neq(0,0,0)$ en:
+\begin{enumerate}
+\item[1)] $h(x)=b$ o $h(x)=-b$
+\item[2)] $h(x)=cx$, cuando $x\geq 0$
+\item[3)]  $h(x)=cx$, cuando $x\leq 0$
+\end{enumerate}
+%
+$\dot{V}< 0$ para $h(x)$ de 1, y, 2 y 3 son an\'{a}logas porque cuando $x<0$, $-h(x)>0$, as\'{\i} que basta con probar para uno de los dos que $\dot{V}< 0$.\\
+
+Luego, si $x\geq 0$ , $h(x)=cx$:
+\begin{align*}
+\dot{V} &=\frac{\gamma +\eta}{2\eta\alpha}x[y-cx] + cy[\alpha y- \alpha cx] + cx[x-y+z] + A y(x-y+z) + 2\eta \beta y^2 \\ 
+&- 2\eta z (x-y+z)- \beta y z \\
+&= \left(-\frac{\gamma +\eta}{2\eta\alpha }c+c \right)x^{2}+ \left(c\alpha-A +2\eta \beta \right)y^2 - 2\eta z^{2} + \left[ \frac{\gamma +\eta}{2\eta\alpha }- \alpha c^{2} -c \\
+&+A \right]xy + [c-2\eta]xz + [A+2\eta-\beta]yz
+\end{align*}
+%
+As\'{\i}, $\dot{V}< 0$ bajo las condiciones:
+\begin{equation*}
+\begin{split}
+&\quad-\frac{\gamma +\eta}{2\eta\alpha}+1 < 0, pues c>0  \\\\
+&\quad\frac{\gamma +\eta}{2\eta\alpha}+1 < 0 \\\\
+&\quad\frac{\gamma +\eta}{2\eta\alpha}- \alpha c^{2} -c +A < 0 \\\\
+&\quad c-2\eta = 0 \\\\
+& \quad A+2\eta-\beta=0
+\end{split}
+\end{equation*}
+\end{slides}
+\section{S\'{o}lido Invariante}
+\begin{slides}{S\'{o}lido Invariante}
+Metodolog\'{\i}a...
+\end{slides}
+\section{Integrales de Darboux}
+\begin{slides}{Integrales de Darboux}
+El M\'{e}todo de Darboux es un m\'{e}todo para construir integrales primeras de campos vectoriales polinomiales utilizando sus curvas invariantes algebraicas \cite {CP}. Ésto a trav\'{e}s de la construcci\'{o}n de una funci\'{o}n (denominada funci\'{o}n tipo Darboux) que juega el papel de factor integrante del sistema\cite {CP}.\\
+En esta parte del trabajo se estudió la integrabilidad del sistema de Ecuaciones Diferenciales objeto de estudio.
+\end{slides}
+\begin{slides}{Integrales de Darboux}
+Se define el espacio de vectores $\mathbb{X}$ asociado a (\ref{ang1}) como:
+$$\mathbb{X}= [\alpha (y-h(x)]\dfrac{\partial}{\partial x}+(x-y+z)\dfrac{\partial}{\partial y}-\beta y\dfrac{\partial}{\partial z}$$
+
+Lo que sigue es nuestro resultado principal en esta sección, la Integral Primera Racional Generalizada del sistema (\ref{ang1}) con $\beta>0$
+\begin{teorema}\label{tdar1} 
+La \'{u}nica integral primera racional generalizada del sistema (\ref{ang1}) se calcula teniendo en cuenta:
+\begin{enumerate}
+\item[i)] Si $\beta<1/4$, es la funci\'{o}n: $$|z+x|\Bigg[\dfrac{\Big|\frac{y}{z+x}-r_1\Big|^{r_1}}{\Big|\frac{y}{z+x}-r_2\Big|^{r_2}}\Bigg]^{\Big(\frac{\beta}{r_1-r_2}\Big)}$$
+Donde $r_{1}$ y $r_{2}$ son las ra\'{\i}ces reales distintas de $\beta s^2-s+1$.
+\item[ii)]Si $\beta=1/4$, es la funci\'{o}n: $$\Bigg[\dfrac{1}{\frac{y}{z+x}-r}\Bigg]^{\beta}|z+x| E{\Big[\frac{\beta r}{y/(z+x)-r}\Big]}$$
+Donde $r$ es una ra\'{\i}z real doble de $\beta s^2-s+1$.
+\item[iii)]Si $\beta>1/4$, es la funci\'{o}n: $$\Big|\Big(\dfrac{2\beta s -1}{\sqrt{4\beta-1}}\Big)^2+1\Big|^{1/2}(z+x) E\Big[{\dfrac{1}{\sqrt{4\beta-1}}\arctan\Big(\dfrac{2\beta s-1}{\sqrt{4\beta-1}}\Big)}\Big]$$
+\end{enumerate}
+\end{teorema}
+\begin{nota}
+$e^{x}= E(x)$
+\end{nota}
+\begin{prueba}
+Consideremos el sistema (\ref{ang1}) con $\beta > 0$, es decir:
+$\dot{x}=\alpha (y-h(x))$, $\dot{y}=x-y+z$, $\dot{z}=-\beta y$ \\\\
+podemos expresar $\dot{y}$ como $\dfrac{dz}{dt}=\dfrac{dz}{dy}\dfrac{dy}{dt}=-\beta y$,
+entonces $$\dfrac{dz}{dy}=\dfrac{-\beta y}{x-y+z}$$
+\begin{equation}\label{ecdar2}
+(x-y+z)dz+\beta ydy=0
+\end{equation}
+La ecuaci\'{o}n diferencial (\ref{ecdar2}) se puede convertir en homog\'{e}nea a trav\'{e}s de las sustituciones:\\
+\begin{displaymath}
+\begin{array}{lcl}
+z&=& u-x\\
+y&=& v
+\end{array}
+\end{displaymath}
+Que se obtienen teniendo en cuenta la soluci\'{o}n del sistema
+\begin{displaymath}
+\left\{\begin{array}{lcl}
+z&=&y -x\\
+y&=& 0
+\end{array}\right.
+\end{displaymath}
+en el punto $(0,-x)$
+\\\\
+Luego, (\ref{ecdar2}) queda:
+\begin{equation}\label{ecdar3}
+(-v+u)du+\beta vdv=0
+\end{equation}
+Sea $v=su$, entonces $dv=uds+sdu$. Entonces (\ref{ecdar3}) queda convertida en: \\
+$$ (-su+u)du+\beta su (uds+sdu)=0$$
+separando variables se obtiene:
+\\
+\begin{equation}\label{dar4}
+\int\dfrac{du}{u}=\int\dfrac{-\beta s}{\beta s^2-s+1}ds
+\end{equation}
+La integral del miembro izquierdo de (\ref{dar4}) se resuelve teniendo en cuenta lo siguiente:
+\begin{enumerate}
+\item[i)] Si $\beta<1/4$, $\beta s^2-s+1$ tiene dos ra\'{\i}ces reales $r_{1}=\frac{1+\sqrt{1-4\beta}}{2\beta}$ y $r_{2}=\frac{1-\sqrt{1-4\beta}}{2\beta}$.\\
+La ecuaci\'{o}n (\ref{dar4}) queda:
+$$\ln|z+x|=-\dfrac{\beta}{r_1-r_2}\ln\Bigg[\dfrac{\Big|\frac{y}{z+x}-r_1\Big|^{r_1}}{\Big|\frac{y}{z+x}-r_2\Big|^{r_2}}\Bigg]$$
+Entonces, $$H=\dfrac{\beta}{r_1-r_2}\ln\Bigg[\dfrac{\Big|\frac{y}{z+x}-r_1\Big|^{r_1}}{\Big|\frac{y}{z+x}-r_2\Big|^{r_2}}\Bigg]+\ln|z+x|$$
+es una integral primera racional generalizada del sistema (\ref{ecdar1}). Por lo tanto $$K=E(H)=|z+x|\Bigg[\dfrac{\Big|\frac{y}{z+x}-r_1\Big|^{r_1}}{\Big|\frac{y}{z+x}-r_2\Big|^{r_2}}\Bigg]^{\Big(\frac{\beta}{r_1-r_2}\Big)}$$
+
+\item[ii)]Si $\beta=1/4$, $\beta s^2-s+1$ tiene una ra\'{\i}z doble $r\in\mathbb{R}$,$r=\frac{1}{2\beta}$.\\
+Aqu\'{\i}, la ecuaci\'{o}n (\ref{dar4}) queda:
+$$\ln |u|=-\beta\ln\Big|\dfrac{y}{z+x}-r\Big|+\dfrac{\beta r }{[\frac{y}{z+x}-r]}$$
+Entonces,
+$$H=\beta\ln\Big|\dfrac{y}{z+x}-r\Big|-\dfrac{\beta r }{[\frac{y}{z+x}-r]}+\ln |z+x| $$
+es una integral primera racional generalizada del sistema (\ref{ecdar1}). Por lo tanto
+$$K=E(H)=\Big|\dfrac{y}{z+x}-r\Big|^{\beta}|z+x|E{\Big[\frac{\beta r}{y/(z+x)-r}\Big]}$$\\
+
+\item[iii)] Si $\beta>1/4$.\\
+En este caso, las ra\'{\i}ces $r_{1}$ y $r_{2}$ del polinomio $\beta s^2-s+1$ son complejas, entonces, la integral $\int\dfrac{\beta s }{\beta s^2-s+1}ds$ la resolveremos as\'{\i}:
+\begin{align*}
+\int\dfrac{\beta s }{\beta s^2-s+1}ds&= \int\dfrac{\beta s}{\beta\big[(s-\frac{1}{2\beta})^2+\frac{4\beta-1}{4\beta^2}\big]}ds\\
+&=\int\dfrac{\frac{4\beta^2}{4\beta-1}s}{(\frac{2\beta s-1}{(\sqrt{2\beta s-1}})^2+1}ds\\
+&=\dfrac{2\beta}{\sqrt{4\beta-1}}\int\dfrac{\frac{2\beta s-1}{\sqrt{4\beta-1}}}{(\frac{2\beta s-1}{\sqrt{4\beta-1}})^2+1}ds+\dfrac{2\beta}{\sqrt{4\beta-1}}\int\dfrac{\frac{1}{\sqrt{4\beta-1}}}{(\frac{2\beta s-1}{\sqrt{4\beta-1}})^2+1}ds\\
+&= \dfrac{1}{2}\ln\Big|\Big(\dfrac{2\beta s -1}{\sqrt{4\beta-1}}\Big)^2+1\Big|+\dfrac{1}{\sqrt{4\beta-1}}\arctan\Big(\dfrac{2\beta s-1}{\sqrt{4\beta-1}}\Big)
+\end{align*}
+Reemplazando ahora en (\ref{dar4}):
+$$\ln|z+x|=-\dfrac{1}{2}\ln\Big|\Big(\dfrac{2\beta s -1}{\sqrt{4\beta-1}}\Big)^2+1\Big|-\dfrac{1}{\sqrt{4\beta-1}}\arctan\Big(\dfrac{2\beta s-1}{\sqrt{4\beta-1}}\Big)$$
+Entonces $$H=\dfrac{1}{2}\ln\Big|\Big(\dfrac{2\beta s -1}{\sqrt{4\beta-1}}\Big)^2+1\Big|+\dfrac{1}{\sqrt{4\beta-1}}\arctan\Big(\dfrac{2\beta s-1}{\sqrt{4\beta-1}}\Big)+\ln|z+x|$$
+es una integral primera racional generalizada del sistema (\ref{ecdar1}). Por lo tanto :
+$$K=E(H)=\Big|\Big(\dfrac{2\beta s -1}{\sqrt{4\beta-1}}\Big)^2+1\Big|^{1/2}(z+x)E\Big[{\dfrac{1}{\sqrt{4\beta-1}}\arctan\Big(\dfrac{2\beta s-1}{\sqrt{4\beta-1}}\Big)}\Big]$$
+\\
+Es f\'{a}cil ver que en los casos (i, ii, iii) que para $x+z>0$, $H$ se puede escribir como el cociente de dos funciones anal\'{\i}ticas.
+\end{enumerate}
+\end{prueba}
+\begin{teorema}
+Supongamos que el sistema diferencial (\ref{ang1})  tiene a $p$ como un punto singular y sean $\lambda_1$, $\lambda_2$ y $\lambda_3$ los valores propios de la parte lineal
+del sistema (\ref{ang1}) en $p$. Entonces el n\'{u}mero de integrales primeras racionales generalizadas linealmente independientes del sistema (\ref{ang1}) es como m\'{a}ximo la dimensi\'{o}n del subespacio vectorial m\'{\i}nimo de $\mathbb{R}^3$ que contiene el conjunto:
+$$\{(k_1, k_2, k_3)\in \mathbb{R}^3\quad : \quad k_1\lambda_1+k_2\lambda_2+k_3\lambda_3=0, (k_1, k_2, k_3)\neq (0, 0, 0)\}$$ \cite {JLC}
+\end{teorema}
+\begin{prueba}
+Este teorema sirve para mostrar que el n\'{u}mero de integrales primeras racionales generalizadas son s\'{o}lo las calculadas en el teorema anterior, no hay otras.\\\\
+En primer lugar observemos que el punto singular del sistema (\ref{ecdar1}) es $(0,0,0)$. Los valores propios $\lambda_1$, $\lambda_2$ y $\lambda_3$ de la matriz jacobiana del sistema (\ref{ecdar1}) en el punto singular se relacionan a trav\'{e}s del polinomio $$p(\lambda)= \lambda^{3}+(\alpha c+1)\lambda^{2}+(\alpha c-\alpha+\beta)\lambda+ \alpha\beta c$$ de donde:
+\begin{enumerate}
+\item[-] Si $\alpha = 0$\\
+$$\lambda_1=0 , \lambda_{2,3}=\frac{-1\pm\sqrt{1-4\beta}}{2}$$
+Por lo tanto $k_1\lambda_1+k_2\lambda_2+k_3\lambda_3=0$ es equivalente a $$k_2(-1+\sqrt{1-4\beta})+k_3(-1-\sqrt{1-4\beta})= 0$$
+O en otras palabras:
+\begin{equation}\label{ecdar5}
+\frac{k_{2}}{k_{3}}=-\frac{-1-\sqrt{1-4\beta}}{-1+\sqrt{1-4\beta}}
+\end{equation}
+Es evidente que el lado izquierdo de (\ref{ecdar5}) es un n\'{u}mero racional (una vez que  $k_2, k_3 \in \mathbb{Z}$) y que la elecci\'{o}n de $\beta$ de una manera conveniente el lado derecho de (\ref{ecdar5}) es irracional. Por lo tanto (\ref{ecdar5}) no puede sostenerse para esta elecci\'{o}n conveniente de $\beta$. Por tanto, para este punto singular $(0,0,0)$, la dimensi\'{o}n del subespacio vectorial m\'{\i}nimo de $\mathbb{R}^3$ que contiene el conjunto $$\{(k_1, k_2, k_3)\in \mathbb{R}^3\quad : \quad k_1\lambda_1+k_2\lambda_2+k_3\lambda_3=0, (k_1, k_2, k_3)\neq (0, 0, 0)\}$$ es claramente uno, generado por $(k_1, 0, 0)$. As\'{\i} se deduce de este teorema que el sistema \begin{equation*}
+\begin{array}{lcl}
+\dfrac{dx}{dt}&=&0\\
+&&\\
+\dfrac{dy}{dt}&=&x-y+z\\
+&&\\
+\dfrac{dz}{dt}&=&-\beta y
+\end{array}
+\end{equation*} puede tener solo una integral primera racional generalizada, que debe ser una funci\'{o}n de $H$.
+\item[-]Si $c = 0$ se demuestra de manera an\'{a}loga \\
+
+Con \'{e}sto se completa la demostraci\'{o}n del teorema anterior.
+\end{enumerate}
+\end{prueba}
+\end{slides}
+\section{Conclusiones y Trabajos Futuros}
+\begin{slides}{Conclusiones y Trabajos Futuros}
+En este trabajo se present\'{o} un estudio de los fen\'omenos cr\'iticos de un caso particular del sistema de ecuaciones diferenciales que describe el comportamiento del Circuito de Chua, se construye una funci\'{o}n de Lyapunov para en sistema con la que se demuestra que el \'{u}nico punto de equilibrio es asint\'{o}ticamente estable, se construye un superficie esf\'{e}rica en $\mathbb{R}^{3}$ positivamente invariante que encierra al punto cr\'{\i}tico y que tiene la propiedad de que cada recta dirigida desde el origen de coordenadas a la superficie la interseca en uno y solo un punto tal que toda trayectoria del sistema aut\'{o}nomo la cruza hacia el interior, para $t$ suficientemente grande, y se estudia la integrabilidad del sistema calculando la integral primera racional generalizada y demostrando que \'{e}sta es \'{u}nica.\vspace{1cm}
+En trabajos futuros se espera:
+ \begin{itemize}
+\renewcommand{\labelitemi}{$\star$}
+\item Mostrar la existencia de ciclos l\'{\i}mites del sistema de estudio.
+\item Al Perturbar el caso particular en el \'{a}ngulo de inclinaci\'{o}n de la funci\'{o}n de transferencia $=$ Sistema Original del Circuito de Chua.
+\item Demostrar que el sistema con la funci\'{o}n de transferencia propia del circuito de Chua, no tiene ciclos L\'{\i}mites- Se piensa que hay rompimiento en el punto de Inflexi\'{o}n.
+\item Estudiar Num\'{e}ricamente el Sistema.
+\item Integrales de Darboux para el Sistema Original.
+\end{itemize}
+\end{slides}
+\section{Referencias Bibliograficas}
+\begin{frame}{Referencias Bibliograficas}
+
+  \begin{thebibliography}{10}
+\bibitem{LPD} Lawrence Perko. Differential Equations and Dynamical Systems. Texts in Applied Mathematics 7, Estados Unidos de Am\'{e}rica.
+\bibitem{JRC} j. Rodr\'{\i}guez Contreras, J. Rodriguez Ripoll. Amortiguamento de Soluciones Per\'{\i}odicas. Dpto de Matem\'{a}ticas, Universidad del Atl\'{a}ntico.Agosto de 2010.
+\bibitem{EVE}E.V\'{a}squez, Existencia de Soluciones Per\'{\i}odicas en un Sistema diferencial No lineal en el Espacio.Trabajo de grado Pregrado. Universidad del Atl\'{a}ntico, Noviembre 2014.
+\bibitem{JGL}J.Ginoux,C.Letellier and L.O. Chua, Topological analysis of chaotic solution of a three-element memristive circuit,\textit{Int.J.Bifurcation Chaos} $\mathbf{20}$ (2010) 3819-3827.
+\bibitem{JLX}J.Llibre and X.Zhang, Darboux theory of the integrability in $\mathbb{C}^{n}$ taking into account the multiplicity,\textit{J. Differential Equations} $\mathbf{246}$ (2009) 541-551.
+\bibitem{JLZ}J.Llibre and X.Zhang, Darboux theory of the integrability for polynomial vector fields in $\mathbb{R}^{n}$ taking into account the multiplicity al infinity,\textit{Bull. Sci. Math.} $\mathbf{133}$ (2009) 765-778.
+\bibitem{BML}B.Muthuswamy and L.O. Chua, Simplest chaotic circuit, \textit{Int.J.Bifurcation Chaos} $\mathbf{20}$ (2010) 1567-1580.
+\bibitem{JLC}J.Llibre and C. Valls, On the integrability of de Muthuswamy-Chua System, \textit{Int.J.Bifurcation Chaos}(2012) 477-488.
+\bibitem{CP}C. Pantazi, El M\'{e}todo de Darboux, \textit{Notas del primer Seminario de Integrabilidad de la Universitat de Catalunya}(Marzo 2005) 61-72.
+    \end{thebibliography}
+
+\end{frame}
+
+\end{document} 

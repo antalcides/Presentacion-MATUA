@@ -1,0 +1,332 @@
+\batchmode
+\makeatletter
+\def\input@path{{style/}{sections/}{pdf/}{logos/}}
+\makeatother
+\documentclass[]{beamer}
+
+
+%-------------------------------------------------------
+% Inclusión de paquetes
+%-------------------------------------------------------
+%\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}Title}}
+%\usepackage{lipsum-es}
+%\usepackage[latin9]{inputenc}
+%\usepackage[ansinew]{inputenc}
+%--------------------------------
+%
+\usepackage{ifthen} 
+\usepackage[T1]{fontenc}
+\usepackage[mathletters]{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,spanish,es-tabla]{babel}
+\uselanguage{spanish}
+\languagepath{spanish}
+\usepackage{environ}
+\usepackage{lmodern}
+\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+%\usepackage[spanish]{babel}
+\usepackage{times}
+
+
+
+%---------------------------------
+\usepackage{amssymb,amsfonts,latexsym,cancel,stmaryrd}%
+\usepackage[ruled,,vlined,lined,linesnumbered]{algorithm2e}
+\usepackage{framed}
+\usepackage{mathptmx}
+\usepackage{helvet}
+%\linespread{1.05}
+\usepackage[full]{textcomp}                        % Caracteres especiales como ' (recto)
+\usepackage{amsmath}
+\makeatletter
+\let\@tmp\@xfloat     
+\usepackage{fixltx2e}
+\let\@xfloat\@tmp                    
+\makeatother
+\makeatletter
+\let\th@plain\relax
+\makeatother
+\theoremstyle{plain}
+\let\openbox\relax
+%\usepackage{ntheorem}
+\let\proofname\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+%\usepackage{ddot}
+%\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{epsfig}
+%\usepackage{amscd}
+\usepackage{longtable}
+%\usepackage{latexcad}
+\usepackage{fancybox}
+\graphicspath{{ps/}{logos/}{figuras/}{sections/Figures/}}
+\listfiles
+% COMANDOS PERSONALES   ----------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\raya}{\rule{2cm}{0.01cm}\\}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\sen}{\mathop{\rm sen}\nolimits}
+\newcommand{\senh}{\mathop{\rm senh}\nolimits}
+\newcommand{\arcsen}{\mathop{\rm arcsen}\nolimits}
+\newcommand{\arcsec}{\mathop{\rm arcsec}\nolimits}
+%\def\sen{\mathop{\mbox{\normalfont sen}}\nolimits}
+\def\max{\mathop{\mbox{\normalfont m\’ax}}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+%----------- cargando el Tema Tesis
+\DeclareGraphicsExtensions{.eps,.jpg,.png, .bmp}
+
+
+\usetheme[]{Tesis}%%% opción para el tema outher.
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (Movimiento por defecto)
+  
+% Si desea cambiar los colores de los diversos elementos en el tema, edite y descomente las siguientes líneas
+
+% Para cambiar los colores de la barra:
+%\setbeamercolor{Tesis}{fg=red!20,bg=red}
+
+% Para cambiar los colores de la estructura:
+%\setbeamercolor{structure}{fg=red}
+
+%Para cambiar el color del texto de la caja del titulo:
+%\setbeamercolor{frametitle}{fg=blue}
+
+%Para cambiar el color del texto y del fondo:
+%\definecolor{azultext}{RGB}{43,93,156}
+
+%-------------------------------------------------------
+% Definiendo y redefiniendo comandos y entornos
+%-------------------------------------------------------
+
+% colores de los hiperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+%\setbeamertemplate{headline}[text line]{\insertsectionnavigationhorizontal{\paperwidth}{}{}}
+%-------------------------------------------------------
+% Informacioón de la página del titulo
+%-------------------------------------------------------
+%%% configuracion del tema %%%%%%%%%%%%%%%%%%%5
+\makeatletter
+  \definecolor{beamer@barcolor}{RGB}{21,46,128}%azul
+  \definecolor{beamer@headercolor}{RGB}{226,107,59}%naranja
+\makeatother
+\newcommand{\cdefault}[4][named]{\begin{tikzpicture}
+\fill[#2,draw=negro] (0,0) rectangle ++(2,1);
+\node[below] at (1,0) {#2};
+\node[below=4mm] at (1,0) {\tiny #3 \{#4\}};
+\node[below=6mm] at (1,0) {\tiny #1};
+\end{tikzpicture}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox\terminalbox
+\lstnewenvironment{terminal}[1][]
+  {\lstset{#1}\setbox\terminalbox=\vbox\bgroup\hsize=0.7\textwidth}
+  {\egroup
+   \tikzstyle{terminal} = [
+    draw=white, text=white, font=courier, fill=blue!20, very thick,
+    rectangle, inner sep=10pt, inner ysep=20pt
+   ]
+   \tikzstyle{terminalTitle} = [
+     fill=red!20, text=white, font=\ttfamily, draw=white
+   ]
+   \begin{tikzpicture}
+   \node [terminal] (box){\usebox{\terminalbox}};
+   \node[terminalTitle, rounded corners, right=10pt] at (box.north west) {tty: /bin/bash};
+   \end{tikzpicture}
+}
+%%%%%%%%%%------------------------------------%%%%%%%%%%
+\newenvironment{slides}[1]
+{\begin{frame}[fragile,allowframebreaks, environment=slides]{#1}}
+{\end{frame}}
+
+%%%%%%%%%%%-------------------------------%%%%%%%%%%%%%%
+%------------------------------------
+\autor[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\institute{Universidad del Atl\'antico}
+\titulo{Como realizar una presentación con Beamer}
+\subtitulo{\LaTeX \ una imprenta con estilo}
+\date{}
+\titulographic{\includegraphics[width=2.5cm]{logos/2}}
+
+%-------------------------------------------------------
+% Cuerpo de la presentación
+%-------------------------------------------------------
+
+\begin{document}
+%-------------------------------------------------------
+% La página del título
+%-------------------------------------------------------
+
+
+\begin{frame}[plain,noframenumbering] % la opción plain elimina la cabecera de la página de título, noframenumbering quita la numeración unicamente de esta diapositiva
+  \titulopage % coloca aquí  la información de la página que se estipuló antes.
+\end{frame}
+
+
+\begin{frame}{Contenido}{}
+\tableofcontents
+\end{frame}
+\section{Motivación}
+
+
+\subsection[Problema básico]{El problema básico que estudiamos}
+\begin{frame}{Poner títulos informativos}
+
+
+\framesubtitle{Los subtítulos de los fotogramas son opcionales.}
+\begin{itemize}
+\item Usar Enumeración{*} a discreción.
+
+
+\pause{}
+
+\item Usar oraciones muy cortas o frases cortas.
+
+
+\pause{}
+
+\item Estos solapados se crean usando el estilo Pausa.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Poner títulos informativos }
+
+\begin{itemize}
+\item<1-> También se pueden usar estas especificaciones para crear solapados 
+\item<3-> Esto permite presentar cosas en cualquier orden
+\item<2-> Ésta se muestra en segundo lugar
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Poner títulos informativos}
+
+\begin{block}<1->{}
+
+\begin{itemize}
+\item Bloque sin título.
+\item Mostrado en todas las diapositivas.
+\end{itemize}
+\end{block}
+\begin{exampleblock}<2->{Título de algún Bloque de ejemplo}
+
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\subsection{Trabajo previo}
+\begin{frame}{Poner títulos informativos}
+
+
+
+\begin{example}<1->
+En la primera diapositiva.
+\end{example}
+
+
+
+\begin{example}<2->
+En la segunda diapositiva.
+\end{example}
+
+\end{frame}
+
+\section{Nuestros resultados/Contribución}
+
+
+\subsection{Resultados principales}
+\begin{frame}{Poner títulos informativos}
+
+\begin{theorem}
+En la primera diapositiva.
+\end{theorem}
+
+
+\pause{}
+\begin{corollary}
+En la segunda diapositiva.
+\end{corollary}
+
+\end{frame}
+
+\begin{frame}{Poner títulos informativos }
+
+\begin{columns}[t]
+
+
+\column{5cm}
+\begin{theorem}<1->
+En la columna de la izquierda.
+\end{theorem}
+
+
+\column{5cm}
+\begin{corollary}<2->
+En la columna de la derecha.\\
+Nueva línea
+\end{corollary}
+
+\end{columns}
+
+\end{frame}
+
+\subsection{Ideas básicas para demostraciones/implementaciones}
+
+
+\section*{Sumario}
+\begin{frame}{Sumario}
+
+\begin{itemize}
+\item El \alert{primer mensaje principal }de la exposición en una o dos
+líneas.
+\item El \alert{segundo mensaje principal} de la exposición en una o dos
+líneas.
+\item Quizás un \alert{tercer mensaje}, pero no más.
+\end{itemize}
+
+
+
+
+\medskip{}
+
+\begin{itemize}
+\item Perspectiva
+
+\begin{itemize}
+\item Lo que no hemos hecho todavía.
+\item Otras cosas pendientes.
+\end{itemize}
+\end{itemize}
+\end{frame}
+\appendix
+
+\section*{Apéndice}
+
+
+\subsection*{Lecturas complementarias}
+\begin{frame}[allowframebreaks]{Lecturas complementarias}
+
+
+\beamertemplatebookbibitems
+\begin{thebibliography}{1}
+\bibitem{Autor1990}A. Autor. \newblock\emph{Manual de Lo que sea}.\newblock
+Editorial, 1990.\beamertemplatearticlebibitems
+
+\bibitem{Alguien2002}S. Alguien.\newblock Sobre esto y aquello\emph{.}
+\newblock\emph{Revista Esto y Aquello}. 2(1):50--100, 2000.\end{thebibliography}
+\end{frame}
+
+
+
+\end{document}

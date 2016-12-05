@@ -1,0 +1,1409 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\batchmode
+
+\def\input@path{{style/}{sections/}{pdf/}{logos/}}
+
+
+
+
+%-------------------------------------------------------
+% InclusiÃ³n de paquetes
+%-------------------------------------------------------
+%\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}Title}}
+%\usepackage{lipsum-es}
+%\usepackage[latin9]{inputenc}
+%\usepackage[ansinew]{inputenc}
+%--------------------------------
+%
+\usepackage{ifthen}
+\usepackage{ucs}
+%\usepackage[english,spanish,es-tabla]{babel}
+\uselanguage{spanish}
+\languagepath{spanish}
+\usepackage{environ}
+\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+%\usepackage[spanish]{babel}
+\usepackage{times}
+
+
+
+
+%---------------------------------
+\usepackage{amsfonts}\usepackage{latexsym}\usepackage{framed}
+%\linespread{1.05}
+\usepackage[full]{textcomp}% Caracteres especiales como ' (recto)
+
+\let\@tmp\@xfloat     
+\usepackage{fixltx2e}
+\let\@xfloat\@tmp                    
+
+
+\let\th@plain\relax
+
+\theoremstyle{plain}
+\let\openbox\relax
+%\usepackage{ntheorem}
+\let\proofname\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+%\usepackage{ddot}
+%\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{epsfig}
+%\usepackage{amscd}
+\usepackage{longtable}
+%\usepackage{latexcad}
+\usepackage{fancybox}
+\graphicspath{{ps/}{logos/}{figuras/}{sections/Figures/}}
+\listfiles
+% COMANDOS PERSONALES   ----------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\raya}{\rule{2cm}{0.01cm}\\}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\sen}{\mathop{\rm sen}\nolimits}
+\newcommand{\senh}{\mathop{\rm senh}\nolimits}
+\newcommand{\arcsen}{\mathop{\rm arcsen}\nolimits}
+\newcommand{\arcsec}{\mathop{\rm arcsec}\nolimits}
+%\def\sen{\mathop{\mbox{\normalfont sen}}\nolimits}
+\def\max{\mathop{\mbox{\normalfont m\’ax}}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+%----------- cargando el Tema Tesis
+\DeclareGraphicsExtensions{.eps,.jpg,.png, .bmp}
+
+
+\usetheme[]{Tesis}%%% opción para el tema outher.
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (Movimiento por defecto)
+  
+% Si desea cambiar los colores de los diversos elementos en el tema, edite y descomente las siguientes líneas
+
+% Para cambiar los colores de la barra:
+%\setbeamercolor{Tesis}{fg=red!20,bg=red}
+
+% Para cambiar los colores de la estructura:
+%\setbeamercolor{structure}{fg=red}
+
+%Para cambiar el color del texto de la caja del titulo:
+%\setbeamercolor{frametitle}{fg=blue}
+
+%Para cambiar el color del texto y del fondo:
+%\definecolor{azultext}{RGB}{43,93,156}
+
+%-------------------------------------------------------
+% Definiendo y redefiniendo comandos y entornos
+%-------------------------------------------------------
+
+% colores de los hiperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+%\setbeamertemplate{headline}[text line]{\insertsectionnavigationhorizontal{\paperwidth}{}{}}
+%-------------------------------------------------------
+% Informacioón de la página del titulo
+%-------------------------------------------------------
+%%% configuracion del tema %%%%%%%%%%%%%%%%%%%5
+
+  \definecolor{beamer@barcolor}{RGB}{21,46,128}%azul
+  \definecolor{beamer@headercolor}{RGB}{226,107,59}%naranja
+
+\newcommand{\cdefault}[4][named]{\begin{tikzpicture}
+\fill[#2,draw=negro] (0,0) rectangle ++(2,1);
+\node[below] at (1,0) {#2};
+\node[below=4mm] at (1,0) {\tiny #3 \{#4\}};
+\node[below=6mm] at (1,0) {\tiny #1};
+\end{tikzpicture}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox\terminalbox
+\lstnewenvironment{terminal}[1][]
+  {\lstset{#1}\setbox\terminalbox=\vbox\bgroup\hsize=0.7\textwidth}
+  {\egroup
+   \tikzstyle{terminal} = [
+    draw=white, text=white, font=courier, fill=blue!20, very thick,
+    rectangle, inner sep=10pt, inner ysep=20pt
+   ]
+   \tikzstyle{terminalTitle} = [
+     fill=red!20, text=white, font=\ttfamily, draw=white
+   ]
+   \begin{tikzpicture}
+   \node [terminal] (box){\usebox{\terminalbox}};
+   \node[terminalTitle, rounded corners, right=10pt] at (box.north west) {tty: /bin/bash};
+   \end{tikzpicture}
+}
+%%%%%%%%%%------------------------------------%%%%%%%%%%
+\newenvironment{slides}[1]{\begin{frame}[fragile,allowframebreaks, environment=slides]{#1}}{\end{frame}}
+
+%%%%%%%%%%%-------------------------------%%%%%%%%%%%%%%
+%------------------------------------
+\autor[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\institute{Universidad del Atl\'antico}
+\titulo{Como realizar una presentación con Beamer}
+\subtitulo{\LaTeX \ una imprenta con estilo}
+
+\titulographic{\includegraphics[width=2.5cm]{logos/2}}
+\author[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\title{Como realizar una presentación con Beamer}
+\subtitle{\LaTeX \ una imprenta con estilo}
+%-------------------------------------------------------
+% Cuerpo de la presentación
+%-------------------------------------------------------
+\end_preamble
+\options ruled,,vlined,lined,linesnumbered
+\use_default_options false
+\begin_modules
+algorithm2e
+\end_modules
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding utf8x
+\fontencoding T1
+\font_roman times
+\font_sans helvet
+\font_typewriter mathptmx
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 2
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frame}[plain,noframenumbering] 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+titulopage 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{frame}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Lo siguiente hace que se muestre un índice al inicio de cada subsección.
+ Suprímelo si no lo quieres.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginSubsection[]{%
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+frametitle{Índice}   
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+tableofcontents[currentsection,currentsubsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+  }
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Contenido
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Estructurar una exposición es una tarea difícil y la siguiente estructura
+ podría no ser adecuada.
+ Aquí hay unas reglas aplicadas a este caso: 
+\end_layout
+
+\begin_layout Itemize
+Exactamente dos o tres secciones (además del sumario).
+ 
+\end_layout
+
+\begin_layout Itemize
+Como máximo, tres subsecciones por sección.
+ 
+\end_layout
+
+\begin_layout Itemize
+Hablar entre 30
+\begin_inset space \thinspace{}
+\end_inset
+
+s y 2
+\begin_inset space \thinspace{}
+\end_inset
+
+min por diapositiva.
+ Así que debería haber entre 15 y 30 fotogramas para decirlo todo.
+\end_layout
+
+\begin_layout Itemize
+Es probable que la audiencia sepa bastante poco sobre el tema de la conferencia,
+ así pues, ¡*simplifique*!
+\end_layout
+
+\begin_layout Itemize
+En una exposición de 20min, conseguir transmitir las ideas principales es
+ bastante.
+ Deje fuera los detalles, aunque eso signifique ser menos preciso de lo
+ que podría parecer necesario.
+\end_layout
+
+\begin_layout Itemize
+Si se omiten detalles vitales para una demostración/implementación, dígalo
+ una vez.
+ Para la audiencia será suficiente.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Diapositiva del Título
+\end_layout
+
+\begin_layout Subsection
+Opción Tesis
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Diapositiva del título en la opción tesis
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+Para crear la diapositiva del titulo se debe colocar en el preámbulo del
+ documento lo siguiente :
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{source}{Pre
+\backslash
+'ambulo}{c1}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+titulo{Especialista}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+director{Dr: Alejandro Urieles
+\backslash
+
+\backslash
+ {
+\backslash
+footnotesize email: al@gmail}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+institutedirector{Universidad del Atl
+\backslash
+'antico}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+author[Antalcides Olivo]{Antalcides Olivo
+\backslash
+
+\backslash
+ {
+\backslash
+footnotesize email: an@gmail}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+institute{Universidad del Atl
+\backslash
+'antico}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+title{Como realizar tu defensa de tesis con Beamer}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+subtitle{
+\backslash
+LaTeX 
+\backslash
+ una imprenta con estilo}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+date{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{source}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+Luego se crea un Frame para la diapositiva con el código:
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{source}{Titulo}{c2} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frame}[plain,noframenumbering] 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+titlepage 
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
+\backslash
+end{frame}  El % que ?está? antes de 
+\backslash
+end{frame} debe quitarlo 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{source}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+El % que está antes de 
+\backslash
+end{frame} debe quitarlo 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Opción Charla
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Diapositiva del título en la opción: Charla 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+En esta caso para crear la diapositiva del titulo se debe colocar en el
+ preámbulo del documento lo siguiente :
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{source}{Pre
+\backslash
+'ambulo}{c3}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+autor[Antalcides Olivo]{Antalcides Olivo
+\backslash
+
+\backslash
+ {
+\backslash
+footnotesize email: an@gmail}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+institute{Universidad del Atl
+\backslash
+'antico}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+titulo{Como realizar una presentación con Beamer}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+subtitulo{
+\backslash
+LaTeX 
+\backslash
+ una imprenta con estilo}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+titulographic{
+\backslash
+includegraphics[width=2.5cm]{logos/2}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+author[Antalcides Olivo]{Antalcides Olivo
+\backslash
+
+\backslash
+ {
+\backslash
+footnotesize email: an@gmail}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+title{Como realizar una presentación con Beamer}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+subtitle{
+\backslash
+LaTeX 
+\backslash
+ una imprenta con estilo}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+date{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{source}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+Luego se crea un Frame para la diapositiva con el código:
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{source}{Titulo}{c4} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frame}[plain,noframenumbering] 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+titulopage 
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
+\backslash
+end{frame}  El % que ?está? antes de 
+\backslash
+end{frame} debe quitarlo 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{source}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Diapositiva del contenido
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Diapositiva de la tabla de contenido 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+Si quieres que el índice se muestre en cada subsección debes colocar el
+ siguiente código
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{source}{
+\backslash
+'Indice al comienzo de cada subsecci
+\backslash
+'on}{c5}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginSubsection[]{%
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+frametitle{Índice}   
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+tableofcontents[currentsection,currentsubsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+  }
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{source}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+Luego se crea un Frame para la diapositiva, donde quieras que aparezca,
+ con el código:
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{source}{Titulo}{c2} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frame}{Contenido}{} 
+\backslash
+tableofcontents
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{frame} El % que ?está? antes de 
+\backslash
+end{frame} debe quitarlo 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{source}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Personalizando el tema
+\end_layout
+
+\begin_layout Subsection
+Colores
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{slides}{Colores}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Paleta de colores}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{pcolor}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+scalebox{0.5}{ 
+\backslash
+begin{tabular}{cccccc}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+cdefault[]{naranja1}{rgb}{1,0.5,0} & 
+\backslash
+cdefault[]{naranja2}{RGB}{255,127,0} & 
+\backslash
+cdefault[]{naranja3}{cmyk}{0,0.5,1,0} & 
+\backslash
+cdefault[]{naranja4}{HTML}{FF7F00} & 
+\backslash
+cdefault[]{rojo}{rgb}{1,0,0}&
+\backslash
+cdefault[]{amarillo}{cmyk}{0,0,1,0}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+cdefault[]{verde}{rgb}{0,1,0} & 
+\backslash
+cdefault[]{azul}{rgb}{0,0,1} & 
+\backslash
+cdefault[]{cian}{cmyk}{1,0,0,0} & 
+\backslash
+cdefault[]{magenta}{cmyk}{0,1,0,0} &
+\backslash
+cdefault[]{negro}{cmyk}{0,0,0,1}&
+\backslash
+cdefault[]{blanco}{cmyk}{0,0,0,0}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
+\backslash
+cdefault[]{theblue}{rgb}{0.02,0.04,0.048}&
+\backslash
+cdefault[]{thered}{rgb}{0.65,0.04,0.48}&
+\backslash
+cdefault[]{thegreen}{rgb}{0.06,0.44,0.08}&
+\backslash
+cdefault[]{thegrey}{gray}{0.5}&
+\backslash
+cdefault[]{rhodo}{rgb}{0.58,0.63,0.45}&
+\backslash
+cdefault[]{wood}{rgb}{0.61,0.51,0.43}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+cdefault[]{theshade}{gray}{0.94}&
+\backslash
+cdefault[]{theframe}{gray}{0.75}&
+\backslash
+cdefault[]{burl}{rgb}{0.27,0.22,0.20}&
+\backslash
+cdefault[]{caper}{rgb}{0.36,0.46,0.23}&
+\backslash
+cdefault[]{mesh}{rgb}{0.97,0.93,0.81}&
+\backslash
+cdefault[]{warningColor}{named}{red}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+cdefault[]{doc}{RGB}{0,60,110}&
+\backslash
+cdefault[]{boxheadcol}{gray}{0.6}&
+\backslash
+cdefault[]{boxcol}{gray}{0.9}&
+\backslash
+cdefault[named]{PowderBlue}{HTML}{B0E0E6}&
+\backslash
+cdefault[named]{MidnightBlue}{HTML}{191970}&
+\backslash
+cdefault[]{bl}{rgb}{0,0.2,0.8}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+cdefault[]{shcolor}{HTML}{FDEDD0}&
+\backslash
+cdefault[named]{GreenTea}{HTML}{CAE8A2}&
+\backslash
+cdefault{MilkTea}{HTML}{C5A16F}&
+\backslash
+cdefault{SaddleBrown}{HTML}{8B4513}&
+\backslash
+cdefault[]{FrameColor}{rgb}{0.25,0.25,1.0}&
+\backslash
+cdefault[]{TitleColor}{rgb}{1.0,1.0,1.0}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular} }
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{slides}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{slides}{Mi paleta de colores}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Paleta de colores}
+\backslash
+label{pcolor}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+scalebox{0.5}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{cccccc} 
+\backslash
+cdefault[]{TFTitleColor}{HTML}{C5A16F}&
+\backslash
+cdefault[]{TFFrameColor}{HTML}{CAE8B3}&
+\backslash
+cdefault[]{secnum}{RGB}{13,151,225}&
+\backslash
+cdefault[]{ptcbackground}{RGB}{212,237,252}&
+\backslash
+cdefault[]{ptctitle}{RGB}{0,177,235}&
+\backslash
+cdefault[]{shadecolor}{RGB}{212,237,252}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+cdefault[]{visgreen}{rgb}{0.733,0.776,0}&
+\backslash
+cdefault[]{myBGcolor}{HTML}{F6F0D6}&
+\backslash
+cdefault{Apricot}{cmyk}{0,0.32,0.52,0}&
+\backslash
+cdefault{Melon}{cmyk}{0,0.46,0.50,0}&
+\backslash
+cdefault[]{mybrown}{RGB}{128,64,0}&
+\backslash
+cdefault[]{lightgrey}{rgb}{0.9,0.9,0.9}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+cdefault[]{darkgreen}{rgb}{0,0.6,0}&
+\backslash
+cdefault[]{est1}{RGB}{0,177,235}&
+\backslash
+cdefault[]{est2}{RGB}{0,119,158}&
+\backslash
+cdefault[]{est3}{RGB}{235,137,0}&
+\backslash
+cdefault[]{est4}{RGB}{158,66,0}&
+\backslash
+cdefault[]{est5}{RGB}{20,20,20}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+cdefault[]{est6}{RGB}{235,235,235}&
+\backslash
+cdefault{RedOrange}{cmyk}{0,0.77,0.87,0}&
+\backslash
+cdefault{BlueViolet}{cmyk}{0.86,0.91,0,0.04}&
+\backslash
+cdefault{OliveGreen}{cmyk}{0.64,0,0.95,0.40}&
+\backslash
+cdefault{Sepia}{cmyk}{0,0.83,1,0.7}&
+\backslash
+cdefault{Tan}{cmyk}{0.14,0.42,0.56,0}
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular}                   }
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{slides}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+makeatletter
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{slides}{paleta de colores}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Paleta de colores}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{pcolor}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+scalebox{0.5}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{cccccc}  
+\backslash
+cdefault[]{beamer@headercolor}{RGB}{21,46,128}&%naranja                
+\backslash
+cdefault[]{beamer@barcolor}{RGB}{226,107,59}&%azul                
+\backslash
+cdefault[]{lightblue}{RGB}{194,193,204}&% light blue               
+\backslash
+cdefault[]{beamer@normaltextcolor}{RGB}{84,97,110}&% gray blue         
+      
+\backslash
+cdefault[]{darkblue}{rgb}{0,0.41,0.54}& % dark blue                %%%-----------o
+tros colores--------- 
+\end_layout
+
+\begin_layout Plain Layout
+
+            
+\backslash
+cdefault[]{colortitulo}{RGB}{219,68,14} 
+\backslash
+
+\backslash
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+     
+\backslash
+cdefault[]{colordominante}{RGB}{243,102,25}&    
+\backslash
+cdefault[]{colordominanteF}{RGB}{219,68,14}&     
+\backslash
+cdefault[]{colordominanteD}{RGB}{137,46,55}&    
+\backslash
+cdefault[]{mostaza}{RGB}{231,196,25}&    
+\backslash
+cdefault[]{amarilloM}{RGB}{248,199,90}&    
+\backslash
+cdefault[]{amarilloD}{RGB}{251,237,121}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+   
+\backslash
+cdefault[]{grisamarillo}{RGB}{248,248,245} &     
+\backslash
+cdefault[]{azulF}{rgb}{.0,.0,.3}&   
+\backslash
+cdefault[]{grisD}{rgb}{.3,.3,.3}&  
+\backslash
+cdefault[]{grisF}{rgb}{.6,.6,.6}& 
+\backslash
+cdefault[]{miverde}{RGB}{44,162,67}&  
+\backslash
+cdefault[]{naranjaua}{RGB}{226,107,59}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+cdefault[]{azulua}{RGB}{21,46,128}&
+\backslash
+cdefault{colorejercicios}{RGB}{99,42,134}& 
+\backslash
+cdefault[]{colrnodocaja}{RGB}{44,91,144}&
+\backslash
+cdefault[]{colrfondocaja}{RGB}{241,241,227}&&
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+      
+\backslash
+end{tabular}                    } 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{slides}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+makeatother
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

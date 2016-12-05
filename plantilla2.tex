@@ -1,0 +1,292 @@
+\batchmode
+\makeatletter
+\def\input@path{{style/}{sections/}{pdf/}{logos/}}
+\makeatother
+\documentclass[]{beamer}
+
+
+%-------------------------------------------------------
+% Inclusi\'{o}n de paquetes
+%-------------------------------------------------------
+%\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}Title}}
+\usepackage{lipsum}
+%\usepackage[latin9]{inputenc}
+%\usepackage[ansinew]{inputenc}
+%--------------------------------
+%
+\usepackage{ifthen}
+\usepackage[T1]{fontenc}
+\usepackage[mathletters]{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,spanish,es-tabla]{babel}
+\uselanguage{spanish}
+\languagepath{spanish}
+\usepackage{environ}
+\usepackage{lmodern}
+\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+%\usepackage[spanish]{babel}
+\usepackage{times}
+
+
+
+%---------------------------------
+\usepackage{amssymb,amsfonts,latexsym,cancel,stmaryrd}%
+\usepackage[ruled,,vlined,lined,linesnumbered]{algorithm2e}
+\usepackage{framed}
+\usepackage{mathptmx}
+\usepackage{helvet}
+%\linespread{1.05}
+\usepackage[full]{textcomp}                        % Caracteres especiales como ' (recto)
+\usepackage{amsmath}
+\makeatletter
+\let\@tmp\@xfloat
+\usepackage{fixltx2e}
+\let\@xfloat\@tmp
+\makeatother
+\makeatletter
+\let\th@plain\relax
+\makeatother
+\theoremstyle{plain}
+\let\openbox\relax
+%\usepackage{ntheorem}
+\let\proofname\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+%\usepackage{ddot}
+%\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{epsfig}
+%\usepackage{amscd}
+\usepackage{longtable}
+%\usepackage{latexcad}
+\usepackage{fancybox}
+\graphicspath{{ps/}{logos/}{figuras/}{sections/Figures/}}
+\listfiles
+% COMANDOS PERSONALES   ----------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\raya}{\rule{2cm}{0.01cm}\\}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\sen}{\mathop{\rm sen}\nolimits}
+\newcommand{\senh}{\mathop{\rm senh}\nolimits}
+\newcommand{\arcsen}{\mathop{\rm arcsen}\nolimits}
+\newcommand{\arcsec}{\mathop{\rm arcsec}\nolimits}
+%\def\sen{\mathop{\mbox{\normalfont sen}}\nolimits}
+\def\max{\mathop{\mbox{\normalfont m\’ax}}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+%----------- cargando el Tema Tesis
+\DeclareGraphicsExtensions{.eps,.jpg,.png, .bmp}
+
+
+\usetheme[]{Tesis}%%% opci\'{o}n para el tema outher.
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (Movimiento por defecto)
+
+% Si desea cambiar los colores de los diversos elementos en el tema, edite y descomente las siguientes l\'{\i}neas
+
+% Para cambiar los colores de la barra:
+%\setbeamercolor{Tesis}{fg=red!20,bg=red}
+
+% Para cambiar los colores de la estructura:
+%\setbeamercolor{structure}{fg=red}
+
+%Para cambiar el color del texto de la caja del titulo:
+%\setbeamercolor{frametitle}{fg=blue}
+
+%Para cambiar el color del texto y del fondo:
+%\definecolor{azultext}{RGB}{43,93,156}
+
+%-------------------------------------------------------
+% Definiendo y redefiniendo comandos y entornos
+%-------------------------------------------------------
+
+% colores de los hiperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+%\setbeamertemplate{headline}[text line]{\insertsectionnavigationhorizontal{\paperwidth}{}{}}
+%-------------------------------------------------------
+% Informacio\'{o}n de la p\'{a}gina del titulo
+%-------------------------------------------------------
+%%% configuracion del tema %%%%%%%%%%%%%%%%%%%5
+\makeatletter
+  \definecolor{beamer@barcolor}{RGB}{21,46,128}%azul
+  \definecolor{beamer@headercolor}{RGB}{226,107,59}%naranja
+\makeatother
+\newcommand{\cdefault}[4][named]{\begin{tikzpicture}
+\fill[#2,draw=negro] (0,0) rectangle ++(2,1);
+\node[below] at (1,0) {#2};
+\node[below=4mm] at (1,0) {\tiny #3 \{#4\}};
+\node[below=6mm] at (1,0) {\tiny #1};
+\end{tikzpicture}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox\terminalbox
+\lstnewenvironment{terminal}[1][]
+  {\lstset{#1}\setbox\terminalbox=\vbox\bgroup\hsize=0.7\textwidth}
+  {\egroup
+   \tikzstyle{terminal} = [
+    draw=white, text=white, font=courier, fill=blue!20, very thick,
+    rectangle, inner sep=10pt, inner ysep=20pt
+   ]
+   \tikzstyle{terminalTitle} = [
+     fill=red!20, text=white, font=\ttfamily, draw=white
+   ]
+   \begin{tikzpicture}
+   \node [terminal] (box){\usebox{\terminalbox}};
+   \node[terminalTitle, rounded corners, right=10pt] at (box.north west) {tty: /bin/bash};
+   \end{tikzpicture}
+}
+%\lstset{escapeinside={/*@}{@*/}}
+%%%%%%%%%%------------------------------------%%%%%%%%%%
+\newenvironment{slides}[1]
+{\begin{frame}[fragile,allowframebreaks, environment=slides]{#1}}
+{\end{frame}}
+
+%%%%%%%%%%%-------------------------------%%%%%%%%%%%%%%
+%------------------------------------
+\titulo{Especialista}
+\director{Dr: Alejandro Urieles\\ {\footnotesize email: al@gmail}}
+\institutedirector{Universidad del Atl\'antico}
+\author[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\institute{Universidad del Atl\'antico}
+\title{Como realizar tu defensa de tesis con Beamer}
+\subtitle{\LaTeX \ una imprenta con estilo}
+\date{}
+%\subtitle{Linguistics as a Window for Understanding the Brain}
+%\titlegraphic{\includegraphics[width=1.5cm]{donald}}
+
+%-------------------------------------------------------
+% Cuerpo de la presentaci\'{o}n
+%-------------------------------------------------------
+
+\begin{document}
+%-------------------------------------------------------
+% La p\'{a}gina del t\'{\i}tulo
+%-------------------------------------------------------
+
+
+\begin{frame}[plain,noframenumbering] % la opci\'{o}n plain elimina la cabecera de la p\'{a}gina de t\'{\i}tulo, noframenumbering quita la numeraci\'{o}n unicamente de esta diapositiva
+  \titlepage % coloca aqu\'{\i}  la informaci\'{o}n de la p\'{a}gina que se estipul\'{o} antes.
+\end{frame}
+
+
+\begin{frame}{Contenido}{}
+\tableofcontents
+\end{frame}
+
+
+\section{Teoremas}
+\begin{frame}{Teoremas}
+\begin{teorema}
+Macondo era el pueblo de Jos\'e Arcadio Buend\'ia, un habitante con gran imaginaci\'on, casado con \'Ursula Iguar\'an, que sol\'ia comprar inventos a Melquiades, el cabecilla de un grupo de gitanos que aparec\'ian una vez al a\~no con novedosos artilugios. Entre los objetos que le compr\'o hab\'ia un im\'an para buscar oro, una lupa a la cual le pretend\'ia dar aplicaciones militares, mapas portugueses y instrumentos de navegaci\'on. La mayor\'ia de sus experimentos se frustraron, como consecuencia llev\'o a cabo una expedici\'on para conocer otros pueblos, descubri\'o que Macondo estaba rodeada por agua.
+%Los primeros dos hijos de Jos\'e Arcadio y \'Ursula fueron Jos\'e Arcadio, el mayor y Aureliano, el peque\~no. Al a\~no siguiente cuando volvieron los gitanos ya no estaba con ellos Melqu\'iades, que hab\'ia muerto. La novedad que trajeron los gitanos aquel a\~no fue el hielo.
+\end{teorema}
+\end{frame}
+\begin{frame}{Prueba 1}
+\begin{tcolorbox}[breakable,colback=blue!5,colframe=blue!75!black,title=My title]
+  My cool formalization
+\tcblower
+  $\displaystyle\sum\limits_{i=1}^n i = \frac{n(n+1)}{2}$
+\end{tcolorbox}
+\end{frame}
+\begin{frame}[fragile]{Entorno}
+\begin{source}{Entorno}{c1}
+Formas para utilizar cualquier entorno.
+\begin{entorno}
+ ...
+\end{entorno}
+
+% ?Descripci\'{o}n?
+\begin{entorno}[(?Descripci\'{o}n?)]
+ ...
+\end{entorno}
+
+% ?Descripci\'{o}n? + referencia
+\begin{entorno}[(? Descripci\'{o}n ?)][referencia]
+ ...
+\end{entorno}
+
+% Referencia
+\begin{entorno}[][referencia] % [] es obligatorio
+ ..
+\end{entorno}
+
+\end{source}
+\end{frame}
+\section{Ejemplo}
+
+\section{block predefinidos}
+\begin{frame}[allowframebreaks]{Prueba 3}
+\begin{block}{Block Title}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+\end{block}
+\begin{alertblock}{Block Title}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+\end{alertblock}
+\begin{definition}
+A prime number is a number that...
+\end{definition}
+\begin{example}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+\end{example}
+\begin{theorem}[Pythagoras]
+$ a^2 + b^2 = c^2$
+\end{theorem}
+\begin{corollary}
+$ x + y = y + x  $
+\end{corollary}
+
+\begin{exampleblock}{}
+  {\large ``To be, or not to be: that is the question.''}
+  \vskip5mm
+  \hspace*\fill{\small--- William Shakespeare, Hamlet}
+\end{exampleblock}
+
+\end{frame}
+%%%%%%%%%%%cambiando el color a los textbullet
+\setbeamercolor{itemize item}{fg=red} % all frames will have red bullets
+
+\begin{frame}{cambiando el color de los text bullet}
+\setbeamercolor*{item}{fg=red}
+  \begin{itemize}
+    \item First item.
+    \item Second item.
+    \item Third item.
+    \item Fourth item.
+  \end{itemize}
+
+\end{frame}
+
+\section{Bibliograf\'{\i}a citada}
+\begin{frame}{Material de referencia }
+
+  \begin{thebibliography}{10}
+
+    \bibitem[Kern, 2007]{Kern07}
+    Uwe Kern.
+    \newblock {\em Extending \LaTeX{}'s color facilities: The {\tt xcolor}
+      package}, January 2007.
+
+    \bibitem{Matthias10}
+    Andreas Matthias.
+    \newblock {\em {The pdfpages Package}}, December 2010.
+        \bibitem[Tantau, 2008]{Tantau08}
+    Till Tantau.
+    \newblock {\em {The TikZ and PGF Packages. Manual for version 2.00.}}
+    \newblock Institut f\"{u}r Theoretische Informatik, Universit\"{a}t zu
+      L\"{u}beck, February 2008.
+
+
+
+  \end{thebibliography}
+
+\end{frame}
+
+\end{document} 

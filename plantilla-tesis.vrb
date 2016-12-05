@@ -1,0 +1,15 @@
+\frametitle{Referencias Bibliograficas}
+
+  \begin{thebibliography}{10}
+\bibitem{LPD} Lawrence Perko. Differential Equations and Dynamical Systems. Texts in Applied Mathematics 7, Estados Unidos de Am\'{e}rica.
+\bibitem{JRC} j. Rodr\'{\i}guez Contreras, J. Rodriguez Ripoll. Amortiguamento de Soluciones Per\'{\i}odicas. Dpto de Matem\'{a}ticas, Universidad del Atl\'{a}ntico.Agosto de 2010.
+\bibitem{EVE}E.V\'{a}squez, Existencia de Soluciones Per\'{\i}odicas en un Sistema diferencial No lineal en el Espacio.Trabajo de grado Pregrado. Universidad del Atl\'{a}ntico, Noviembre 2014.
+\bibitem{JGL}J.Ginoux,C.Letellier and L.O. Chua, Topological analysis of chaotic solution of a three-element memristive circuit,\textit{Int.J.Bifurcation Chaos} $\mathbf{20}$ (2010) 3819-3827.
+\bibitem{JLX}J.Llibre and X.Zhang, Darboux theory of the integrability in $\mathbb{C}^{n}$ taking into account the multiplicity,\textit{J. Differential Equations} $\mathbf{246}$ (2009) 541-551.
+\bibitem{JLZ}J.Llibre and X.Zhang, Darboux theory of the integrability for polynomial vector fields in $\mathbb{R}^{n}$ taking into account the multiplicity al infinity,\textit{Bull. Sci. Math.} $\mathbf{133}$ (2009) 765-778.
+\bibitem{BML}B.Muthuswamy and L.O. Chua, Simplest chaotic circuit, \textit{Int.J.Bifurcation Chaos} $\mathbf{20}$ (2010) 1567-1580.
+\bibitem{JLC}J.Llibre and C. Valls, On the integrability of de Muthuswamy-Chua System, \textit{Int.J.Bifurcation Chaos}(2012) 477-488.
+\bibitem{CP}C. Pantazi, El M\'{e}todo de Darboux, \textit{Notas del primer Seminario de Integrabilidad de la Universitat de Catalunya}(Marzo 2005) 61-72.
+    \end{thebibliography}
+
+\beamerclosesubstitutedenvironement {slides}

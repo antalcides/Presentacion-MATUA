@@ -1,0 +1,1040 @@
+%% LyX 2.1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[ruled,,vlined,lined,linesnumbered]{beamer}
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{stmaryrd}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ % this default might be overridden by plain title style
+ \newcommand\makebeamertitle{\frame{\maketitle}}%
+ % (ERT) argument for the TOC
+ \AtBeginDocument{%
+   \let\origtableofcontents=\tableofcontents
+   \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+   \def\gobbletableofcontents#1{\origtableofcontents}
+ }
+
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\batchmode
+
+\def\input@path{{style/}{sections/}{pdf/}{logos/}}
+
+
+
+
+%-------------------------------------------------------
+% Inclusi\'on de paquetes
+%-------------------------------------------------------
+%\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}Title}}
+%\usepackage{lipsum-es}
+%\usepackage[latin9]{inputenc}
+%\usepackage[ansinew]{inputenc}
+%--------------------------------
+%
+\usepackage{ifthen}
+\usepackage{ucs}
+\usepackage[english,spanish,es-tabla]{babel}
+%\uselanguage{spanish}
+%\languagepath{spanish}
+\usepackage{environ}
+\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+%\usepackage[spanish]{babel}
+\usepackage{times}
+
+
+
+
+%---------------------------------
+\usepackage{amsfonts}\usepackage{latexsym}\usepackage{framed}
+%\linespread{1.05}
+\usepackage[full]{textcomp}% Caracteres especiales como ' (recto)
+
+\let\@tmp\@xfloat     
+\usepackage{fixltx2e}
+\let\@xfloat\@tmp                    
+
+
+\let\th@plain\relax
+
+\theoremstyle{plain}
+\let\openbox\relax
+%\usepackage{ntheorem}
+\let\proofname\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+%\usepackage{ddot}
+%\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{epsfig}
+%\usepackage{amscd}
+\usepackage{longtable}
+%\usepackage{latexcad}
+\usepackage{fancybox}
+\graphicspath{{ps/}{logos/}{figuras/}{sections/Figures/}}
+\listfiles
+%%%% traducción de rotulos %%%%%%%%%%%%%%%%
+\gdef\abstractname{Resumen}
+\def\bibname{Bibliograf\'{\i}a}
+\def\appendixname{\textcolor{myred}{\HUGE{Ap\'endice}}}
+\def\contentsname{Contenido}
+\def\listfigurename{\'Indice de Figuras}
+\def\listtablename{\'Indice de Tablas}
+\def\indexname{\scshape{\'Indice}}
+\def\figurename{Figura}
+\gdef\tablename{Tabla}
+% COMANDOS PERSONALES   ----------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\raya}{\rule{2cm}{0.01cm}\\}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\sen}{\mathop{\rm sen}\nolimits}
+\newcommand{\senh}{\mathop{\rm senh}\nolimits}
+\newcommand{\arcsen}{\mathop{\rm arcsen}\nolimits}
+\newcommand{\arcsec}{\mathop{\rm arcsec}\nolimits}
+%\def\sen{\mathop{\mbox{\normalfont sen}}\nolimits}
+\def\max{\mathop{\mbox{\normalfont m\’ax}}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+%----------- cargando el Tema Tesis
+\DeclareGraphicsExtensions{.eps,.jpg,.png, .bmp}
+
+
+\usetheme[fixedCircCnt]{Tesis}%%% opción para el tema .
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (Movimiento por defecto)
+  
+% Si desea cambiar los colores de los diversos elementos en el tema, edite y descomente las siguientes líneas
+
+% Para cambiar los colores de la barra:
+%\setbeamercolor{Tesis}{fg=red!20,bg=red}
+
+% Para cambiar los colores de la estructura:
+%\setbeamercolor{structure}{fg=red}
+
+%Para cambiar el color del texto de la caja del titulo:
+%\setbeamercolor{frametitle}{fg=blue}
+
+%Para cambiar el color del texto y del fondo:
+%\definecolor{azultext}{RGB}{43,93,156}
+
+%-------------------------------------------------------
+% Definiendo y redefiniendo comandos y entornos
+%-------------------------------------------------------
+
+% colores de los hiperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+%\setbeamertemplate{headline}[text line]{\insertsectionnavigationhorizontal{\paperwidth}{}{}}
+%-------------------------------------------------------
+% Informacioón de la página del titulo
+%-------------------------------------------------------
+%%% configuracion del tema %%%%%%%%%%%%%%%%%%%5
+
+  \definecolor{beamer@barcolor}{RGB}{21,46,128}%azul
+  \definecolor{beamer@headercolor}{RGB}{226,107,59}%naranja
+ \newcommand{\cdefault}[4][named]{\begin{tikzpicture}
+\fill[#2,draw=negro] (0,0) rectangle ++(2,1);
+\node[below] at (1,0) {#2};
+\node[below=4mm] at (1,0) {\tiny #3 \{#4\}};
+\node[below=6mm] at (1,0) {\tiny #1};
+\end{tikzpicture}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox\terminalbox
+\lstnewenvironment{terminal}[1][]
+  {\lstset{#1}\setbox\terminalbox=\vbox\bgroup\hsize=0.7\textwidth}
+  {\egroup
+   \tikzstyle{terminal} = [
+    draw=white, text=white, font=courier, fill=blue!20, very thick,
+    rectangle, inner sep=10pt, inner ysep=20pt
+   ]
+   \tikzstyle{terminalTitle} = [
+     fill=red!20, text=white, font=\ttfamily, draw=white
+   ]
+   \begin{tikzpicture}
+   \node [terminal] (box){\usebox{\terminalbox}};
+   \node[terminalTitle, rounded corners, right=10pt] at (box.north west) {tty: /bin/bash};
+   \end{tikzpicture}
+}
+%%%%%%%%%%------------------------------------%%%%%%%%%%
+\newenvironment{slides}[1]{\begin{frame}[fragile,allowframebreaks, environment=slides]{#1}}{\end{frame}}
+
+%%%%%%%%%%%-------------------------------%%%%%%%%%%%%%%
+%------------------------------------
+\autor[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\institute{Universidad del Atl\'antico}
+\titulo{Personalizando el tema {\tt Tesis} de {\tt Beamer}}
+\subtitulo{\LaTeX \ una imprenta con estilo}
+
+\titulographic{\includegraphics[width=2.5cm]{logos/2}}
+\author[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\title{Como realizar una presentación con Beamer}
+\subtitle{\LaTeX \ una imprenta con estilo}
+%-------------------------------------------------------
+% Cuerpo de la presentación
+%-------------------------------------------------------
+
+\makeatother
+
+\usepackage{babel}
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+
+\begin{document}
+\begin{frame}[plain,noframenumbering] 
+\titulopage 
+\end{frame}
+
+
+
+\AtBeginSubsection[]{%
+  \frame<beamer>{ 
+    \frametitle{Índice}   
+    \tableofcontents[currentsection,currentsubsection] 
+  }
+}
+\begin{frame}{Contenido}
+
+
+\tableofcontents{}
+
+
+
+
+\end{frame}
+
+\section{Diapositiva del Título}
+
+
+\subsection{Opción Tesis}
+\begin{frame}[fragile]{Diapositiva del título en la opción tesis}
+
+
+Para crear la diapositiva del titulo se debe colocar en el preámbulo
+del documento lo siguiente :
+
+\begin{source}{Pre\'ambulo}{c1}
+\titulo{Especialista}
+\director{Dr: Alejandro Urieles\\ {\footnotesize email: al@gmail}}
+\institutedirector{Universidad del Atl\'antico}
+\author[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\institute{Universidad del Atl\'antico}
+\title{Como realizar tu defensa de tesis con Beamer}
+\subtitle{\LaTeX \ una imprenta con estilo}
+\date{}
+\end{source}
+
+Luego se crea un Frame para la diapositiva con el código:
+
+\begin{source}{Titulo}{c2} 
+\begin{frame}[plain,noframenumbering] 
+\titlepage 
+% \end{frame}  El % que ?está? antes de \end{frame} debe quitarlo 
+\end{source}
+Para cambiar el logo del director debe colocar en el preámbulo.
+\begin{source}{}{Logo del Director}{c2a}
+\titlegraphic{\includegraphics[scale=0.5]{2a}}
+donde 2a el nombre del archivo del logo.
+\end{source}
+\end{frame}
+
+\subsection{Opción Charla}
+\begin{frame}[fragile]{Diapositiva del título en la opción: Charla }
+
+
+En esta caso para crear la diapositiva del titulo se debe colocar
+en el preámbulo del documento lo siguiente :
+
+\begin{source}{Pre\'ambulo}{c3}
+\autor[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\institute{Universidad del Atl\'antico}
+\titulo{Como realizar una presentación con Beamer}
+\subtitulo{\LaTeX \ una imprenta con estilo}
+\titulographic{\includegraphics[width=2.5cm]{logos/2}}
+\author[Antalcides Olivo]{Antalcides Olivo\\ {\footnotesize email: an@gmail}}
+\title{Como realizar una presentación con Beamer}
+\subtitle{\LaTeX \ una imprenta con estilo}
+\date{}
+\end{source}
+
+Luego se crea un Frame para la diapositiva con el código:
+
+\begin{source}{Titulo}{c4} 
+\begin{frame}[plain,noframenumbering] 
+\titulopage 
+ \end{frame}   
+\end{source}
+\end{frame}
+
+\section{Diapositiva del contenido}
+\begin{slides}{Diapositiva de la tabla de contenido }
+Si quieres que el índice se muestre en cada ,   debes colocar
+el siguiente código
+\begin{source}{\'Indice al comienzo de cada subsecci\'on}{c5}
+\AtBeginSubsection[]{%
+  \frame<beamer>{ 
+    \frametitle{Índice}   
+    \tableofcontents[currentsection,currentsubsection] 
+  }
+}
+\end{source}
+Luego se crea un Frame para la diapositiva, donde quieras que aparezca,
+con el código:
+\begin{source}{Titulo}{c5} 
+\begin{frame}{Contenido}{} 
+\tableofcontents
+\end{frame} 
+\end{source}
+\end{slides}
+%
+\section{Personalizando el tema {\tt Tesis}}
+
+
+\subsection{Cambiando los colores }
+\begin{slides}{Colores}
+Para personalizar el tema {\tt Tesis} una de las opciones es cambiar los colores que trae por defecto, que son los colores representativos de la Universidad del Atlántico.
+Se coloca en el preámbulo lo siguiente: 
+\begin{source}{Cambiando colores}{c6}
+\makeatletter
+\definecolor{beamer@barcolor}{cmyk}{0,0.46,0.50,0} % Melon 
+\definecolor{beamer@headercolor}{HTML}{B0E0E6} % PowderBlue
+% Para cambiar los colores de la barra:
+\setbeamercolor{Tesis}{fg=beamer@headercolor!30,bg=beamer@headercolor}
+% Para cambiar los colores de la estructura:
+\setbeamercolor{structure}{fg=beamer@headercolor}
+%  Para cambiar el color del texto de la caja del titulo:
+\setbeamercolor{frametitle}{fg=blue}
+% Para cambiar el color del texto y del fondo:
+\definecolor{azultext}{RGB}{43,93,156}
+%  Para los entornos Theorem
+\definecolor{colordominante}{cmyk}{0,0.46,0.50,0}
+\definecolor{colordominanteF}{RGB}{219,68,14}
+\definecolor{colordominanteD}{RGB}{137,46,55}
+\makeatother
+\end{source}
+Recuerde comentar las lineas, de la 119 a la 122.
+\end{slides}
+\begin{frame}{Colores II}
+los cambios que se hicieron en el preámbulo para redefinir los colores nos dan como resultados:
+\begin{figure}[H]
+\includegraphics[scale=.22]{color-title.png} 
+\caption{Diapositiva del t\'itulo}
+\label{fig1}
+\end{figure}
+\end{frame}
+\begin{frame}{Colores III}
+\begin{figure}[H]
+\includegraphics[scale=.7]{ej-color.png} 
+\caption{Ejemplo de una diapositiva }
+\label{fig1}
+\end{figure}
+\end{frame}
+\begin{frame}{Colores IV}
+\begin{figure}[H]
+\includegraphics[scale=.2]{tcolorbox.png} 
+\caption{Ejemplo de una diapositiva }
+\label{fig1}
+\end{figure}
+Presentaremos ahora una paleta de colores, para que los puedan usar, ya que estan definidos en este tema.
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{slides}{Mi paleta de colores }
+\begin{table}[H]
+\caption{Paleta de colores}
+\label{pcolor}
+\scalebox{0.5}{
+\begin{tabular}{cccccc}
+\cdefault[]{naranja1}{rgb}{1,0.5,0} & \cdefault[]{naranja2}{RGB}{255,127,0} & \cdefault[]{naranja3}{cmyk}{0,0.5,1,0} & \cdefault[]{naranja4}{HTML}{FF7F00} & \cdefault[]{rojo}{rgb}{1,0,0}&\cdefault[]{amarillo}{cmyk}{0,0,1,0}\\
+\cdefault[]{verde}{rgb}{0,1,0} & \cdefault[]{azul}{rgb}{0,0,1} & \cdefault[]{cian}{cmyk}{1,0,0,0} & \cdefault[]{magenta}{cmyk}{0,1,0,0} &\cdefault[]{negro}{cmyk}{0,0,0,1}&\cdefault[]{blanco}{cmyk}{0,0,0,0}\\% 
+\cdefault[]{theblue}{rgb}{0.02,0.04,0.048}&\cdefault[]{thered}{rgb}{0.65,0.04,0.48}&\cdefault[]{thegreen}{rgb}{0.06,0.44,0.08}&\cdefault[]{thegrey}{gray}{0.5}&\cdefault[]{rhodo}{rgb}{0.58,0.63,0.45}&\cdefault[]{wood}{rgb}{0.61,0.51,0.43}\\%
+\cdefault[]{theshade}{gray}{0.94}&\cdefault[]{theframe}{gray}{0.75}&\cdefault[]{burl}{rgb}{0.27,0.22,0.20}&\cdefault[]{caper}{rgb}{0.36,0.46,0.23}&\cdefault[]{mesh}{rgb}{0.97,0.93,0.81}&\cdefault[]{warningColor}{named}{red}\\%
+\cdefault[]{doc}{RGB}{0,60,110}&\cdefault[]{boxheadcol}{gray}{0.6}&\cdefault[]{boxcol}{gray}{0.9}&\cdefault[named]{PowderBlue}{HTML}{B0E0E6}&\cdefault[named]{MidnightBlue}{HTML}{191970}&\cdefault[]{bl}{rgb}{0,0.2,0.8}\\%
+\cdefault[]{shcolor}{HTML}{FDEDD0}&\cdefault[named]{GreenTea}{HTML}{CAE8A2}&\cdefault{MilkTea}{HTML}{C5A16F}&\cdefault{SaddleBrown}{HTML}{8B4513}&\cdefault[]{FrameColor}{rgb}{0.25,0.25,1.0}&\cdefault[]{TitleColor}{rgb}{1.0,1.0,1.0}\\%
+\end{tabular} }
+\end{table}
+\end{slides}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{slides}{Mi paleta de colores I\hspace{-5pt}}
+\begin{table}[H]
+\caption{Paleta de colores}\label{pcolor}
+\scalebox{0.5}{
+\begin{tabular}{cccccc} \cdefault[]{TFTitleColor}{HTML}{C5A16F}&\cdefault[]{TFFrameColor}{HTML}{CAE8B3}&\cdefault[]{secnum}{RGB}{13,151,225}&\cdefault[]{ptcbackground}{RGB}{212,237,252}&\cdefault[]{ptctitle}{RGB}{0,177,235}&\cdefault[]{shadecolor}{RGB}{212,237,252}\\%
+\cdefault[]{visgreen}{rgb}{0.733,0.776,0}&\cdefault[]{myBGcolor}{HTML}{F6F0D6}&\cdefault{Apricot}{cmyk}{0,0.32,0.52,0}&\cdefault{Melon}{cmyk}{0,0.46,0.50,0}&\cdefault[]{mybrown}{RGB}{128,64,0}&\cdefault[]{lightgrey}{rgb}{0.9,0.9,0.9}\\%
+\cdefault[]{darkgreen}{rgb}{0,0.6,0}&\cdefault[]{est1}{RGB}{0,177,235}&\cdefault[]{est2}{RGB}{0,119,158}&\cdefault[]{est3}{RGB}{235,137,0}&\cdefault[]{est4}{RGB}{158,66,0}&\cdefault[]{est5}{RGB}{20,20,20}\\%
+\cdefault[]{est6}{RGB}{235,235,235}&\cdefault{RedOrange}{cmyk}{0,0.77,0.87,0}&\cdefault{BlueViolet}{cmyk}{0.86,0.91,0,0.04}&\cdefault{OliveGreen}{cmyk}{0.64,0,0.95,0.40}&\cdefault{Sepia}{cmyk}{0,0.83,1,0.7}&\cdefault{Tan}{cmyk}{0.14,0.42,0.56,0}\\%
+\end{tabular}                   }
+\end{table}
+\end{slides}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\begin{slides}{Mi paleta de colores II\hspace{-4pt}}
+\begin{table}[H]
+\caption{Paleta de colores}
+\label{pcolor}
+\scalebox{0.5}{
+\begin{tabular}{cccccc}  \cdefault[]{beamer@headercolor}{RGB}{21,46,128}&%naranja 
+\cdefault[]{beamer@barcolor}{RGB}{226,107,59}&%azul
+\cdefault[]{lightblue}{RGB}{194,193,204}&% light blue 
+\cdefault[]{beamer@normaltextcolor}{RGB}{84,97,110}&% gray blue 
+\cdefault[]{darkblue}{rgb}{0,0.41,0.54}& % dark blue 
+                  %%%-----------otros colores--------- 
+\cdefault[]{colortitulo}{RGB}{219,68,14} \\%
+     \cdefault[]{colordominante}{RGB}{243,102,25}&    \cdefault[]{colordominanteF}{RGB}{219,68,14}&     \cdefault[]{colordominanteD}{RGB}{137,46,55}&    \cdefault[]{mostaza}{RGB}{231,196,25}&    \cdefault[]{amarilloM}{RGB}{248,199,90}&    \cdefault[]{amarilloD}{RGB}{251,237,121}\\
+\cdefault[]{grisamarillo}{RGB}{248,248,245} &     \cdefault[]{azulF}{rgb}{.0,.0,.3}&   \cdefault[]{grisD}{rgb}{.3,.3,.3}&  \cdefault[]{grisF}{rgb}{.6,.6,.6}& \cdefault[]{miverde}{RGB}{44,162,67}&  \cdefault[]{naranjaua}{RGB}{226,107,59}\\
+ \cdefault[]{azulua}{RGB}{21,46,128}&\cdefault[]{colorejercicios}{RGB}{99,42,134}& \cdefault[]{colrnodocaja}{RGB}{44,91,144}&\cdefault[]{colrfondocaja}{RGB}{241,241,227}&&\\ 
+      \end{tabular}                    } 
+\end{table} 
+\end{slides}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Entornos o Blocks}
+El tema {\tt Tesis } tiene un conjunto amplio de entornos, los cuales los presentaremos todos en las diapositivas que siguentes.
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Entorno}
+\begin{source}{Entorno}{c1}
+Formas para utilizar cualquier entorno.
+\begin{entorno}
+ ...
+\end{entorno}
+
+% ?Descripción?
+\begin{entorno}[(?Descripción?)]
+ ...
+\end{entorno}
+
+% ?Descripción? + referencia
+\begin{entorno}[(? Descripción ?)][referencia]
+ ...
+\end{entorno}
+
+% Referencia
+\begin{entorno}[][referencia] % [] es obligatorio
+ ..
+\end{entorno}
+
+\end{source}
+\end{frame}
+\begin{frame}[fragile]{Ejemplo de una definición}
+\begin{source}{Entorno definicion}{}
+\begin{definicion}
+Definimos la multiplicación entre números naturales como una aplicación
+\begin{tabular}{cccc}
+ $\times$: & $I\!N\times I\!N$ & $\rightarrow$ & %
+$I\!N$%
+\tabularnewline
+ & $\left(n,m\right)$ & $\mapsto$ & $l=\times\left(n,m\right) = nm$\tabularnewline
+\end{tabular}, de modo que $\forall m,n\in I\!N$ se cumple 
+\begin{description}
+\item [{i)}] $\times\left(1,m\right)=\times\left(m,1\right)=m$
+\item [{ii)}] $\times\left(\varphi\left(n\right),m\right)=\times\left(n,m\right)+m.$
+\end{description}
+
+\end{definicion}
+\end{source}
+\scalebox{0.7}{\begin{definicion}
+Definimos la multiplicación entre números naturales como una aplicación
+\begin{tabular}{cccc}
+ $\times$: & $I\!N\times I\!N$ & $\rightarrow$ & %
+$I\!N$%
+\tabularnewline
+ & $\left(n,m\right)$ & $\mapsto$ & $l=\times\left(n,m\right) = nm$\tabularnewline
+\end{tabular}, de modo que $\forall m,n\in I\!N$ se cumple 
+\begin{description}
+\item [{i)}] $\times\left(1,m\right)=\times\left(m,1\right)=m$
+\item [{ii)}] $\times\left(\varphi\left(n\right),m\right)=\times\left(n,m\right)+m.$
+\end{description}
+
+\end{definicion}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Ejemplo de un teorema} 
+\begin{source}{Entorno definicion}{}
+\begin{teorema}
+?Ningún? ?número? natural coincide con su sucesor, es decir $\forall n\in\na,\: n\neq\varphi\left(n\right).$
+\end{teorema}
+\end{source}
+\scalebox{0.7}{
+\begin{teorema}
+Ningún número natural coincide con su sucesor, es decir $\forall n\in I\!N,\: n\neq\varphi\left(n\right).$
+\end{teorema}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Ejemplo de una proposición}
+\begin{source}{Entorno definicion}{}
+\begin{proposicion}
+Si $\mathfrak{C}$ es una ?colección? de subconjuntos de $\Omega,$ existe una $\sigma-?álgebra?$ minimal que contiene a $\mathfrak{C}$, esto es, existe una $\sigma-?álgebra?$ $\sigma (\mathfrak{C})$ que contiene a $\mathfrak{C}$  tal que si $\mathfrak{B}$ es otra $\sigma-?álgebra?$ que contiene a $\mathfrak{C}$, $\sigma (\mathfrak{C})\subseteq \mathfrak{B}.$
+\end{proposicion}
+\end{source}
+\scalebox{0.7}{
+\begin{proposicion}
+Si $\mathfrak{C}$ es una colección de subconjuntos de $\Omega,$ existe una $\sigma-\mbox{\'algebra}$ minimal que contiene a $\mathfrak{C}$, esto es, existe una $\sigma-\mbox{\'algebra}$ $\sigma (\mathfrak{C})$ que contiene a $\mathfrak{C}$  tal que si $\mathfrak{B}$ es otra $\sigma-\mbox{\'algebra}$ que contiene a $\mathfrak{C}$, $\sigma (\mathfrak{C})\subseteq \mathfrak{B}.$
+\end{proposicion}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Ejemplo de un lema}
+\begin{source}{Entorno definicion}{}
+\begin{lema}
+Sean $f_1, f_2, f_3. \cdots, f$ funciones medibles
+\begin{enumerate}
+\itemps Si $f_n\<\geq f$ para todo $n$ y $\int fd\mu > -\infty$, \\
+$$\liminf_{n\rightarrow \infty} \int f_nd\mu\geq\int\left( \liminf_{n\rightarrow \infty} f_n \right)d\mu  $$
+\itemps Si $f_n\geq f$ para todo $n$ y $\int fd\mu < +\infty$, \\
+$$\liminf_{n\rightarrow \infty} \int f_nd\mu\leq\int\left( \liminf_{n\rightarrow \infty} f_n \right)d\mu  $$
+\end{enumerate}
+\end{lema}
+\end{source}
+\scalebox{0.7}{
+\begin{lema}
+Sean $f_1, f_2, f_3. \cdots, f$ funciones medibles
+\begin{enumerate}
+\itemps Si $f_n\<\geq f$ para todo $n$ y $\int fd\mu > -\infty$, \\
+$$\liminf_{n\rightarrow \infty} \int f_nd\mu\geq\int\left( \liminf_{n\rightarrow \infty} f_n \right)d\mu  $$
+\itemps Si $f_n\geq f$ para todo $n$ y $\int fd\mu < +\infty$, \\
+$$\liminf_{n\rightarrow \infty} \int f_nd\mu\leq\int\left( \liminf_{n\rightarrow \infty} f_n \right)d\mu  $$
+\end{enumerate}
+\end{lema}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Ejemplo de un corolario}
+\begin{source}{Entorno definicion}{}
+\begin{corolario}\\
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+ \begin{enumerate}
+ \item[1.] ${\displaystyle \lim_{x\rightarrow c}}[k_1f_1(x)+k_2f_2(x)+\dots+k_nf_n(x)]=k_1L_1+k_2L_2+\dots+k_nL_n $
+ \item[2.]${\displaystyle \lim_{x\rightarrow c}}[f_1(x)f_2(x)\dots f_n(x)]=L_1L_2\dots L_n $
+ \end{enumerate}
+ \end{corolario}
+\end{source}
+\scalebox{0.7}{
+ \begin{corolario}\\
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+ \begin{enumerate}
+ \item[1.] \scalebox{0.9}{${\displaystyle \lim_{x\rightarrow c}}[k_1f_1(x)+k_2f_2(x)+\dots+k_nf_n(x)]=k_1L_1+k_2L_2+\dots+k_nL_n $}
+ \item[2.]\scalebox{0.9}{${\displaystyle \lim_{x\rightarrow c}}[f_1(x)f_2(x)\dots f_n(x)]=L_1L_2\dots L_n $}
+ \end{enumerate}
+ \end{corolario}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Presentemos un ejemplo}
+\begin{source}{Entorno definicion}{}
+\begin{ejemplo}
+Demuestre que si $p(x)=a_0+a_1x+\dots + a_nx^n$ entonces
+ $$\lim_{x\rightarrow c}p(x)=p(c)$$
+ \end{ejemplo}
+\end{source}
+\scalebox{0.7}{
+\begin{ejemplo}
+Demuestre que si $p(x)=a_0+a_1x+\dots + a_nx^n$ entonces
+ $$\lim_{x\rightarrow c}p(x)=p(c)$$
+ \end{ejemplo}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Presentemos una scaja}
+\begin{source}{Entorno definicion}{}
+\begin{scaja}
+Sea $f:\, A\overset{f}{\rightarrow}B$ una ?función? de $A$
+en $B$, llamaremos dominio de la ?función? $f$, al conjunto de todas
+las primeras componentes, el cual denotaremos por $D_{f}$ , es decir:
+\[
+D_{f}=\left\{ x\in A:\:\mbox{tal que existe un }y\in B\wedge\left(x,y\right)\in f\right\} \subseteq A.
+\]
+ \end{scaja}
+\end{source}
+\scalebox{0.7}{
+\begin{scaja}
+Sea $f:\, A\overset{f}{\rightarrow}B$ una función de $A$
+en $B$, llamaremos dominio de la función $f$, al conjunto de todas
+las primeras componentes, el cual denotaremos por $D_{f}$ , es decir:
+\[
+D_{f}=\left\{ x\in A:\:\mbox{tal que existe un }y\in B\wedge\left(x,y\right)\in f\right\} \subseteq A.
+\]
+ \end{scaja}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Presentemos el entorno vocabulario}
+\begin{source}{Entorno definicion}{}
+\begin{vocabulario}
+Sea $f:\, A\overset{f}{\rightarrow}B$ una ?función? de $A$
+en $B$, llamaremos dominio de la ?función? $f$, al conjunto de todas
+las primeras componentes, el cual denotaremos por $D_{f}$ , es decir:
+\[
+D_{f}=\left\{ x\in A:\:\mbox{tal que existe un }y\in B\wedge\left(x,y\right)\in f\right\} \subseteq A.
+\]
+ \end{vocabulario}
+\end{source}
+\scalebox{0.7}{
+\begin{vocabulario}
+Sea $f:\, A\overset{f}{\rightarrow}B$ una función de $A$
+en $B$, llamaremos dominio de la función $f$, al conjunto de todas
+las primeras componentes, el cual denotaremos por $D_{f}$ , es decir:
+\[
+D_{f}=\left\{ x\in A:\:\mbox{tal que existe un }y\in B\wedge\left(x,y\right)\in f\right\} \subseteq A.
+\]
+ \end{vocabulario}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Presentemos el entorno cajaejercicios}
+\begin{source}{Entorno definicion}{}
+\begin{vocabulario}
+\begin{cajaejercicios}
+Sí $p:\:4<7$ y $q:\ 6\,\mbox{ es ?número? par}$.
+Calcular el valor de verdad de $p\wedge q.$ 
+ \end{cajaejercicios}
+\end{source}
+\scalebox{0.7}{
+\begin{cajaejercicios}
+Sí $p:\:4<7$ y $q:\ 6\,\mbox{ es número par}$.
+Calcular el valor de verdad de $p\wedge q.$ 
+ \end{cajaejercicios}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Presentemos el entorno proof}
+\begin{source}{Entorno definicion}{}
+\begin{proof}
+Para probar que las proposiciones $(p\rightarrow q)$ y
+$(\sim q\rightarrow\sim p)$ son ?lógicamente? equivalentes debemos
+probar que $(p\rightarrow q)$ $\leftrightarrow$ $(\sim q\rightarrow\sim p)$
+es una ?tautología?. 
+\end{proof}
+\end{source}
+\scalebox{0.7}{
+\begin{proof}
+Para probar que las proposiciones $(p\rightarrow q)$ y
+$(\sim q\rightarrow\sim p)$ son lógicamente equivalentes debemos
+probar que $(p\rightarrow q)$ $\leftrightarrow$ $(\sim q\rightarrow\sim p)$
+es una tautología. 
+\end{proof}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Presentemos el entorno prueba}
+\begin{source}{Entorno definicion}{}
+\begin{prueba}
+Para probar que las proposiciones $(p\rightarrow q)$ y
+$(\sim q\rightarrow\sim p)$ son ?lógicamente? equivalentes debemos
+probar que $(p\rightarrow q)$ $\leftrightarrow$ $(\sim q\rightarrow\sim p)$
+es una ?tautología?. 
+\end{prueba}
+\end{source}
+%\scalebox{0.7}{
+\begin{prueba}
+Para probar que las proposiciones $(p\rightarrow q)$ y
+$(\sim q\rightarrow\sim p)$ son lógicamente equivalentes debemos
+probar que $(p\rightarrow q)$ $\leftrightarrow$ $(\sim q\rightarrow\sim p)$
+es una tautología. 
+\end{prueba}
+%}
+\end{frame}
+\begin{frame}[fragile]{Block sin título}
+\begin{source}{Entorno definicion}{}
+\begin{block}<1->{}
+\begin{itemize}
+\item Bloque sin ?título?.
+\item Mostrado en todas las diapositivas.
+\end{itemize}
+\end{block}
+\end{source}
+%\scalebox{0.7}{
+\begin{block}<1->{}
+\begin{itemize}
+\item Bloque sin título.
+\item Mostrado en todas las diapositivas.
+\end{itemize}
+\end{block}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block de ejemplo con título}
+\begin{source}{Entorno definicion}{}
+\begin{exampleblock}<2->{?Título? de ?algún? Bloque de ejemplo}
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{exampleblock}
+\end{source}
+%\scalebox{0.7}{
+\begin{exampleblock}<2->{Título de algún Bloque de ejemplo}
+
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{exampleblock}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block example}
+\begin{source}{Entorno definicion}{}
+\begin{example}
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{example}
+\end{source}
+%\scalebox{0.7}{
+\begin{example}
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{example}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block alertblock}
+\begin{source}{Entorno definicion}{}
+\begin{alertblock}{Un block para alertas}
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{alertblock}
+\end{source}
+%\scalebox{0.7}{
+\begin{alertblock}{Un block para alertas}
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{alertblock}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block theorem}
+\begin{source}{Entorno definicion}{}
+\begin{theorem}
+?Ningún? ?número? natural coincide con su sucesor, es decir $\forall n\in I\!N,\: n\neq\varphi\left(n\right).$
+\end{theorem}
+\end{source}
+%\scalebox{0.7}{
+\begin{theorem}
+Ningún número natural coincide con su sucesor, es decir $\forall n\in I\!N,\: n\neq\varphi\left(n\right).$
+\end{theorem}
+
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block corollary}
+\begin{source}{Entorno definicion}{}
+\begin{corollary}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{corollary}
+\end{source}
+%\scalebox{0.7}{
+\begin{corollary}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{corollary}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block example}
+\begin{source}{Entorno definicion}{}
+\begin{example}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{example}
+\end{source}
+%\scalebox{0.7}{
+\begin{example}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{example}
+%}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block examples}
+\begin{source}{Entorno definicion}{}
+\begin{examples}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{examples}
+\end{source}
+%\scalebox{0.7}{
+\begin{examples}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{examples}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block definition}
+\begin{source}{Entorno definicion}{}
+\begin{definition}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{definition}
+\end{source}
+%\scalebox{0.7}{
+\begin{definition}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{definition}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block fact}
+\begin{source}{Entorno definicion}{}
+\begin{fact}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{fact}
+\end{source}
+%\scalebox{0.7}{
+\begin{fact}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{fact}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block definitions}
+\begin{source}{Entorno definicion}{}
+\begin{definitions}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{definitions}
+\end{source}
+%\scalebox{0.7}{
+\begin{definitions}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{definitions}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block definitionT}
+\begin{source}{Entorno definicion}{}
+\begin{definitionT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{definitionT}
+\end{source}
+%\scalebox{0.7}{
+\begin{definitionT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{definitionT}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block corollaryT}
+\begin{source}{Entorno definicion}{}
+\begin{corollaryT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{corollaryT}
+\end{source}
+%\scalebox{0.7}{
+\begin{corollaryT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{corollaryT}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block ejerciciosT}
+\begin{source}{Entorno definicion}{}
+\begin{ejerciciosT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{ejerciciosT}
+\end{source}
+%\scalebox{0.7}{
+\begin{ejerciciosT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{ejerciciosT}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block theoremeT}
+\begin{source}{Entorno definicion}{}
+\begin{theoremeT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{theoremeT}
+\end{source}
+%\scalebox{0.7}{
+\begin{theoremeT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{theoremeT}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block Problema}
+\begin{source}{Entorno definicion}{}
+\begin{problema}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{problema}
+\end{source}
+%\scalebox{0.7}{
+\begin{problema}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{problema}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block exerciseT}
+\begin{source}{Entorno definicion}{}
+\begin{exerciseT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{exerciseT}
+\end{source}
+%\scalebox{0.7}{
+\begin{exerciseT}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{exerciseT}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block ejercicio}
+\begin{source}{Entorno definicion}{}
+\begin{ejercicio}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{ejercicio}
+\end{source}
+%\scalebox{0.7}{
+\begin{ejercicio}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{ejercicio}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block nota}
+\begin{source}{Entorno definicion}{}
+\begin{nota}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{nota}
+\end{source}
+%\scalebox{0.7}{
+\begin{nota}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{nota}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block exer}
+\begin{source}{Entorno definicion}{}
+\begin{exer}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{exer}
+\end{source}
+%\scalebox{0.7}{
+\begin{exer}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{exer}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block ejer}
+\begin{source}{Entorno definicion}{}
+\begin{ejer}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{ejer}
+\end{source}
+%\scalebox{0.7}{
+\begin{ejer}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{ejer}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block solu}
+\begin{source}{Entorno definicion}{}
+\begin{solu}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{solu}
+\end{source}
+%\scalebox{0.7}{
+\begin{solu}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{solu}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block ejercicios}
+\begin{source}{Entorno definicion}{}
+\begin{definitions}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{definitions}
+\end{source}
+%\scalebox{0.7}{
+\begin{ejercicios}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{ejercicios}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Block caja}
+\begin{source}{Entorno definicion}{}
+\begin{caja}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{caja}
+\end{source}
+%\scalebox{0.7}{
+\begin{caja}
+ Si \hspace{5pt}$\displaystyle \lim_{x\rightarrow c}f_1(x)=L_1, \displaystyle \lim_{x\rightarrow c}f_2(x)=L_2,\dots, \displaystyle \lim_{x\rightarrow c}f_n(x)=L_n $
+ entonces
+\end{caja}
+%}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

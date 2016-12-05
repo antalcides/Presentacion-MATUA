@@ -1,0 +1,300 @@
+% This is the main beamer theme file of the Tesis theme.
+% Copyright (c) 2015 by Antalcides Olivo <antalcides@outlook.com >
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+% This program is based on the theme designed by Lilyana Vankova <lilqna.v@gmail.com> in 2014 called Feather
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeTesis}[2015/06/06 v1.0.0 The Tesis Beamer Theme]
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% Cargando paquetes requeridos
+
+\RequirePackage{tikz}
+\RequirePackage{calc}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Opciones del tema, definiciones y plantillas.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% Opciones par el circulo que indica el progreso ( progress bar/circle)
+
+               \def\beamer@progressmovingCircCnt{movingCircCnt} % moving circular counter
+               \def\beamer@progressfixedCircCnt{fixedCircCnt} % fixed circular counter
+               \def\beamer@progresscorner{corner} % a counter
+               \def\beamer@progressstyle{movingCircCnt} % default
+               \DeclareOptionBeamer{progressstyle}{\def\beamer@progressstyle{#1}}
+               \DeclareOptionBeamer{rotationcw}{\def\beamer@rotationcw{true}}
+               \DeclareOptionBeamer{shownavsym}{\def\beamer@shownavsym{true}}
+               \ProcessOptionsBeamer
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% la altura de la cabecera es de 2,5 veces la altura de la linea  del título del marco
+
+               \newlength{\beamer@height}
+               \usebeamerfont{frametitle} %use the frame title font
+               \setlength{\beamer@height}{2.5\baselineskip}
+                 \usebeamerfont{frametitulo} 
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% reseteando las fuantes
+
+               \reset@font
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% radio de logo
+
+               \newlength{\beamer@logoradius}
+               \setlength{\beamer@logoradius}{0.95\beamer@height/2}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% ancho de borde
+
+               \newlength{\beamer@borderwidth}
+               \setlength{\beamer@borderwidth}{1.05mm}  % el grosor del borde de la circunferencia
+ 
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% radio de la circunferencia interior del logo
+
+               \newlength{\beamer@logoinnerradius}
+               \setlength{\beamer@logoinnerradius}{0.85\beamer@logoradius} 
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% radio de la circunferencia exterior del logo
+
+               \newlength{\beamer@logoouterradius}
+               \setlength{\beamer@logoouterradius}{\beamer@logoinnerradius+\beamer@borderwidth}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% radio de la circunferencia del contdor de páginas
+
+               \newlength{\beamer@counterradius}
+               \setlength{\beamer@counterradius}{\beamer@logoinnerradius/2+\beamer@logoouterradius/2}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%especificando la opción Beamer
+
+               \mode<presentation>% se refiere a los primeros cuatro modos (beamer,handout,second and trans). Es decir, para todos los modos excepto el modo artículo
+{
+               \ifbeamercolorempty[fg]{Tesis}
+   {
+               \setbeamercolor{Tesis}{use={structure,palette sidebar primary},fg=palette sidebar primary.fg,bg=structure.fg}
+    }
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+ % headline
+
+               \setbeamertemplate{headline}
+   {
+               \tesisheaderbackground\vspace{5pt plus 5pt minus 5pt}
+    }
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% footline  
+
+               \setbeamertemplate{footline}
+    {
+        \begin{beamercolorbox}[wd=1.0\paperwidth,ht=1.25ex,dp=1ex,left]{headfoot}
+                {\usebeamercolor[fg]{frametitle}\usebeamerfont{section in head/foot}\hspace*{3.5ex}
+                \insertshortauthor\ |\ 
+                \insertshorttitle\hspace{10pt}
+                \insertshortsubtitle
+                 }
+        \end{beamercolorbox}
+     }
+
+%----------------------------------------------------------------------------------------------------------------------------------
+  
+% frame title
+
+                \setbeamertemplate{frametitle}
+    {
+    
+     \begin{minipage}[c][0.9\beamer@height][c]{\textwidth}
+                {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\vspace*{-20pt}\hspace*{1cm}\strut\insertframetitle\strut}\\[-3pt]
+                {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\hspace*{1cm}\strut\insertframesubtitle\strut\par}
+        \end{minipage}
+   }
+                \ifx\beamer@shownavsym\undefined % insertando los simbolos de navegación
+                \setbeamertemplate{navigation symbols}
+
+                \fi
+%}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------------------------------------------------
+  
+% frame titulo
+
+                \setbeamertemplate{frametitulo}
+    {
+    
+     \begin{minipage}[c][0.9\beamer@height][c]{\textwidth}
+                {\usebeamercolor[fg]{frametitulo}\usebeamerfont{frametitulo}\vspace*{-20pt}\hspace*{1cm}\strut\insertframetitulo\strut}\\[-3pt]
+                {\usebeamercolor[fg]{framesubtitulo}\usebeamerfont{framesubtitulo}\hspace*{1cm}\strut\insertframesubtitulo\strut\par}
+        \end{minipage}
+   }
+                \ifx\beamer@shownavsym\undefined % insertando los simbolos de navegación
+                \setbeamertemplate{navigation symbols}
+
+                \fi
+}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% macros usados en el tema
+%% coordenadas para el la caja del fondo en el encabezado ( fancy header background)
+
+                \newcommand{\tesisheaderbackground}[0]
+{
+        \begin{tikzpicture}[overlay]
+
+                \coordinate (UL) at (0,0); %esquina superior izquierda de la diapositiva
+                \coordinate (HLR) at (\paperwidth,-0.9\beamer@height); %inferior derecha del encabezado
+
+                \coordinate (ULL) at (0,-0.95\beamer@height); % esquina superior izquierda de la línea
+                \coordinate (LLR) at (\paperwidth,-1\beamer@height); % esquina inferior derecha de la línea
+
+                \coordinate (ULF) at (0,-5.90\beamer@height); % esquina superior izquierda de la linea del pie (footline)
+                \coordinate (LFR) at (\paperwidth,-6.08\beamer@height); %esquina inferior derecha de la footline
+                \coordinate (logopos) at ([shift={(-\beamer@logoouterradius-2.05\beamer@borderwidth,\beamer@height-\beamer@logoouterradius-1.8\beamer@borderwidth)}] HLR); % coordenadas del logotipo y la posición circulo derecho
+                %%%%%%%%%%%%%%%%nuevo
+                 \coordinate (logoposi) at ([shift={(0.6\beamer@height,-0.5\beamer@height)}]UL); % coordenadas del logotipo y la posición circulo izquierdo
+                
+                %%%%%%%%%%%%%%fin nuevo
+               %%%%%%%%%%%%%%%%%%%%% Barra de navegacio%%%%%%%%%%
+               
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%%dibujaando el fondo del encabezado, el círculo y el logotipo
+
+     {
+                \usebeamercolor{Tesis}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% dibujando el fondo azul del rectángulo de la cabecera y la línea debajo de ella
+
+                \draw[draw=none,fill=Tesis.bg] (UL) rectangle (HLR); % rect\'angulo del fondo
+                \draw[draw=none,fill=Tesis.fg] (ULL) rectangle (LLR); % linea inferior al rectángulo del fondo
+                \draw[draw=none,fill=Tesis.bg] (ULF) rectangle (LFR); % footline 
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% dibujando el circulo interno
+
+                \fill[fill=Tesis.fg] (logopos) circle (\beamer@logoouterradius);
+                 \fill[fill=Tesis.fg] (logoposi) circle (\beamer@logoouterradius);%nuevo
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% dibujando los circulos externos
+
+                \fill[fill=normal text.bg] (logopos) circle (\beamer@logoinnerradius);%derecho
+                \fill[fill=normal text.bg] (logoposi) circle (\beamer@logoinnerradius);%izquierdo
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% colocando los  logos en los circulos
+
+                \node at (logopos) {\includegraphics[width=1.1\beamer@logoradius]{logos/2b}};%derecho
+                \node at (logoposi) {\includegraphics[width=\beamer@logoradius]{logos/3}};%izquierdo
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% dibujando el progreso de las páginas ( progress circle/bar)
+
+                \ifx\beamer@progressstyle\beamer@progressmovingCircCnt% the circular counter with a moving counter
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% calculando la posición final del marcador de progreso
+
+                \ifx\beamer@rotationcw\undefined% counterclockwise rotation
+                \pgfmathsetmacro{\progress}{220*\insertframestartpage/\inserttotalframenumber}; %%% 220 cubre todo el círculo, mientras que 360 da dos vueltas
+                \else% clockwise rotation
+                \pgfmathsetmacro{\progress}{-220*\insertframestartpage/\inserttotalframenumber}; 
+                \fi
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% dibujando el arco
+                
+                \draw[color=Tesis.bg,line width=0.2*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos)  arc[radius=\beamer@counterradius, start angle=0, end angle=\progress];
+                \fill[fill=Tesis.bg] ([shift={(\progress:\beamer@counterradius)}] logopos) circle (0.25\beamer@borderwidth);
+                 \draw[color=Tesis.bg,line width=0.2*\beamer@borderwidth] ([xshift=\beamer@counterradius] logoposi)  arc[radius=\beamer@counterradius, start angle=0, end angle=\progress];
+                \fill[fill=Tesis.bg] ([shift={(\progress:\beamer@counterradius)}] logoposi) circle (0.25\beamer@borderwidth);
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%%colocando el numero de la diapositiva
+
+                \node[fill=normal text.bg,draw=Tesis.fg,thick,circle,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius]logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+                 \node[fill=normal text.bg,draw=Tesis.fg,thick,circle,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius]logoposi) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+                \fi      
+                \ifx\beamer@progressstyle\beamer@progressfixedCircCnt % el contador circular de la diapositiva
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% dibujando el numero de la diapositiva
+
+                \ifx\beamer@rotationcw\undefined % counterclockwise rotation
+                \pgfmathsetmacro{\progress}{360*\insertframestartpage};
+                else% clockwise rotation
+                \pgfmathsetmacro{\progress}{-360*\insertframestartpage};
+                \fi
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% dibujando el arco
+
+                \draw[color=Tesis.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc (0:\progress:\beamer@counterradius);
+                 \draw[color=Tesis.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logoposi) arc (0:\progress:\beamer@counterradius);
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%% colocando el numero de la diapositiva
+
+                \node[fill=normal text.bg,draw=Tesis.fg,circle,thick,minimum width=2*\beamer@borderwidth] at ([shift={(\progress:\beamer@counterradius)}] logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+                \fi
+    }
+    %%%%% barra de navegacion
+    \node at ([shift={(2\beamer@logoouterradius,-0.5cm)}]logoposi)  { \Tiny\hspace*{4mm} {\hspace*{2ex}\color{white}|\hspace*{-2ex}}\insertsectionnavigationhorizontal{0ex}{\hskip-1cm}{\hskip20pt}};
+
+        \end{tikzpicture}
+}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%%configuración de las cajas ( blocks)
+
+                \setbeamertemplate{blocks}[rounded][shadow=true]
+                \setbeamercolor{block title}{fg=frametitle.fg, bg=frametitle.bg} 
+                \setbeamercolor{block body}{parent=normal text, use=block title,bg=Tesis.fg!30}
+
+\mode<all>

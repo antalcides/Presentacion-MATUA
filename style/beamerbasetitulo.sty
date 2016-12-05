@@ -1,0 +1,289 @@
+% Copyright 2003--2007 by Till Tantau
+% Copyright 2010 by Vedran Mileti\'c
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /home/vedranm/bitbucket/beamer/base/beamerbasetitulo.sty,v 717e481ca47a 2010/06/12 11:33:01 rivanvx $
+
+\mode
+<presentation>
+
+%
+%
+% The \maketitle command (for compatibility with other classes)
+%
+%
+\def\beamermaketitulo{\ifbeamer@inframe\titulopage\else\frame{\titulopage}\fi}
+
+
+%
+%
+% The \titlepage and \partpage
+%
+%
+\def\titulopage{\usebeamertemplate*{titulo page}\@thanks}
+\def\partepage{\usebeamertemplate*{parte page}}
+%\def\sectionpage{\usebeamertemplate*{section page}}
+%\def\subsectionpage{\usebeamertemplate*{subsection page}}
+
+\mode
+<article>
+{providecommand\titulopage{}
+\newcommand\titulopage{}
+\providecommand\partepage{}
+%\providecommand\sectionpage{}
+%\providecommand\subsectionpage{}
+                                  }
+
+%
+%
+% The \title command
+%
+%
+\newcommand{\titulo}{\@dblarg\beamer@titulo}
+\long\def\beamer@titulo[#1]#2{%
+  \def\inserttitulo{#2}%
+  \def\beamer@shorttitulo{#1}%
+  }
+\titulo{}
+
+\newcommand\insertshorttitulo[1][]{%
+  \beamer@setupshort{#1}%
+  \let\thanks=\@gobble%
+  \ifnum\c@page=1%
+    \hyperlinkpresentationend{\beamer@insertshort{\beamer@shorttitulo}}%
+  \else%
+    \hyperlinkpresentationstart{\beamer@insertshort{\beamer@shorttitulo}}%
+  \fi}
+
+
+
+\mode
+<article>
+{
+  \let\beamer@origtitulo=\titulo
+  \renewcommand{\titulo}[2][]{\beamer@origtitulo{#2}}
+}
+
+
+
+%
+%
+% The \subtitle command
+%
+%
+\newcommand{\subtitulo}{\@dblarg\beamer@subtitulo}
+\long\def\beamer@subtitulo[#1]#2{%
+  \def\insertsubtitulo{#2}%
+  \def\beamer@shortsubtitulo{#1}%
+  }
+\subtitulo{}
+
+\newcommand\insertshortsubtitulo[1][]{%
+  \let\thanks=\@gobble%
+  \beamer@setupshort{#1}%
+  \ifnum\c@page=1%
+    \hyperlinkpresentationend{\beamer@insertshort{\beamer@shortsubtitulo}}%
+  \else%
+    \hyperlinkpresentationstart{\beamer@insertshort{\beamer@shortsubtitulo}}%
+  \fi}
+
+\ifbeamer@autopdfinfo%
+  \g@addto@macro\beamer@firstminutepatches
+  {
+    \begingroup
+      \let\beamer@saved@hook\pdfstringdefPreHook
+      \pdfstringdefDisableCommands{%
+        \let\\=\
+        \let\newline=\\%
+      }%
+      \let\thanks=\@gobble%
+      \hypersetup{pdftitle={\inserttitulo\ifx\insertsubtitulo\@empty\else\ - \insertsubtitulo\fi}}
+      \global\let\pdfstringdefPreHook\beamer@saved@hook
+    \endgroup
+  }
+\fi%
+
+\mode
+<article>
+{
+  \providecommand{\subtitulo}[2][]{\def\insertsubtitulo{#2}\g@addto@macro\@titulo{\\<article>{\normalsize#2}}}
+}
+
+
+%
+%
+% The \date command
+%
+%
+%\def\date{\@dblarg\beamer@date}
+%\long\def\beamer@date[#1]#2{%
+%  \def\insertdate{#2}%
+%  \def\beamer@shortdate{#1}%
+%  }
+%\date{\today}
+%
+%
+%\newcommand\insertshortdate[1][]{%
+%  {%
+%    \let\thanks=\@gobble%
+%    \beamer@setupshort{#1}%
+%    \beamer@insertshort{\beamer@shortdate}%
+%  }}
+%
+%
+%\mode
+%<article>
+%{
+%  \let\beamer@origdate=\date
+%  \renewcommand{\date}[2][]{\beamer@origdate{#2}}
+%}
+
+%
+%
+% The \author command
+%
+%
+\def\autor{\@dblarg\beamer@autor}
+\long\def\beamer@autor[#1]#2{%
+  \def\insertautor{\def\inst{\beamer@insttitulo}\def\and{\beamer@andtitulo}#2}%
+  \def\beamer@shortautor{#1}%
+  \ifbeamer@autopdfinfo%
+    \def\beamer@andstripped{}%
+    \beamer@stripands#2 \and\relax
+    {\let\inst=\@gobble\let\thanks=\@gobble\def\and{, }\hypersetup{pdfauthor={\beamer@andstripped}}}
+  \fi%
+}
+
+%\def\beamer@stripands#1 \and#2\relax{%
+%  \def\beamer@temp{#2}%
+%  \ifx\beamer@temp\@empty
+%    \expandafter\def\expandafter\beamer@andstripped\expandafter{\beamer@andstripped#1}
+%  \else
+%    \expandafter\def\expandafter\beamer@andstripped\expandafter{\beamer@andstripped#1, }
+%    \beamer@stripands#2\relax%
+%  \fi
+%}
+
+\autor{}
+
+
+% Aux commands for \author
+\def\beamer@insttitulo#1{{\donotcoloroutermaths$^{#1}$}}
+\def\beamer@andtitulo{\quad}
+\def\beamer@instotro#1{}
+\def\beamer@andotro{\unskip, }
+
+\newcommand\insertshortautor[1][]{%
+  {%
+    \def\inst{\beamer@instotro}\def\and{\beamer@andotro}\let\thanks=\@gobble%
+    \beamer@setupshort{#1}%
+    \beamer@insertshort{\beamer@shortautor}%
+  }}
+
+
+\mode
+<article>
+{
+  \let\beamer@origautor=\autor
+  \newcommand{\autor}[2][]{\beamer@origautor{#2}}
+}
+
+
+
+%
+%
+% The \titlegraphic command
+%
+%
+\mode
+<all>
+{
+  \newcommand\titulographic[1]{\def\inserttitulographic{#1}}
+  \titulographic{}
+}
+
+
+
+%
+%
+% The \subject command
+%
+%
+\mode
+<all>
+{
+  \providecommand\subject[1]{\hypersetup{pdfsubject={#1}}}
+  \providecommand\keywords[1]{\hypersetup{pdfkeywords={#1}}}
+}
+
+
+
+
+%
+%
+% The \institute command
+%
+%
+%\def\institute{\@dblarg\beamer@institute}
+%\long\def\beamer@institute[#1]#2{%
+%  \def\beamer@temp{#2}%
+%  \ifx\beamer@temp\@empty
+%    \def\insertinstitute{}
+%  \else
+%    \def\insertinstitute{\def\inst{\beamer@instinst}\def\and{\beamer@andinst}#2}%
+%  \fi
+% \def\beamer@shortinstitute{#1}}
+%\institute{}
+%
+%\def\beamer@instinst#1{{\donotcoloroutermaths$^{#1}$}\ignorespaces}
+%\def\beamer@andinst{\\[1em]}
+%
+%\newcommand\insertshortinstitute[1][]{%
+%  {%
+%    \let\thanks=\@gobble%
+%    \def\inst{\beamer@instother}\def\and{\beamer@andother}%
+%    \beamer@setupshort{#1}%
+%    \beamer@insertshort{\beamer@shortinstitute}%
+%  }}
+
+
+
+%\mode
+%<article>
+%{
+%  \ifx\institute\@undefined
+%    \newcommand{\institute}[2][]{}
+%  \else
+%    \let\beamer@originstitute=\institute
+%    \renewcommand{\institute}[2][]{\beamer@originstitute{#2}}
+%  \fi
+%
+%  \providecommand\and{\unskip, }
+%  \providecommand\inst[1]{$^{#1}$}
+%}
+
+
+%
+%
+% The \logo command
+%
+%
+%\def\logo{\setbeamertemplate{logo}}
+%\def\insertlogo{\usebeamertemplate*{logo}}
+%
+%
+%\mode
+%<article>
+%{
+%  \providecommand\logo[1]{}
+%}
+
+
+\mode
+<all>

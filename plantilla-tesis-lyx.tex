@@ -1,0 +1,349 @@
+%% LyX 2.1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[spanish]{beamer}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ % this default might be overridden by plain title style
+ \newcommand\makebeamertitle{\frame{\maketitle}}%
+ % (ERT) argument for the TOC
+ \AtBeginDocument{%
+   \let\origtableofcontents=\tableofcontents
+   \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+   \def\gobbletableofcontents#1{\origtableofcontents}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\batchmode
+\makeatletter
+\def\input@path{{style/}{sections/}{pdf/}{logos/}}
+\makeatother
+%-------------------------------------------------------
+% Inclusi\'{o}n de paquetes
+%-------------------------------------------------------
+%\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}Title}}
+\usepackage{lipsum-es}
+%\usepackage[latin9]{inputenc}
+%\usepackage[ansinew]{inputenc}
+%--------------------------------
+%
+\usepackage{ifthen}
+\usepackage[T1]{fontenc}
+\usepackage[mathletters]{ucs}
+%\usepackage[utf8x]{inputenc}
+\usepackage[english,spanish,es-tabla]{babel}
+\uselanguage{spanish}
+\languagepath{spanish}
+\usepackage{environ}
+\usepackage{lmodern}
+\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+%\usepackage[spanish]{babel}
+\usepackage{times}
+%---------------------------------
+\usepackage{amssymb,amsfonts,latexsym,cancel,stmaryrd}%
+\usepackage[ruled,,vlined,lined,linesnumbered]{algorithm2e}
+\usepackage{framed}
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage[full]{textcomp}                        % Caracteres especiales como ' (recto)
+\usepackage{amsmath}
+\makeatletter
+\let\@tmp\@xfloat
+\usepackage{fixltx2e}
+\let\@xfloat\@tmp
+\makeatother
+\makeatletter
+\let\th@plain\relax
+\makeatother
+\theoremstyle{plain}
+\let\openbox\relax
+%\usepackage{ntheorem}
+\let\proofname\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+%\usepackage{ddot}
+%\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{epsfig}
+%\usepackage{amscd}
+\usepackage{longtable}
+%\usepackage{latexcad}
+\usepackage{fancybox}
+\graphicspath{{ps/}{logos/}{figuras/}{sections/Figures/}}
+%\listfiles
+% COMANDOS PERSONALES   ----------------------------------------------
+
+%----------- cargando el Tema Tesis
+\DeclareGraphicsExtensions{.eps,.jpg,.png, .bmp}
+
+\usetheme[]{Tesis}%%% opci\'{o}n para el tema outher.
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (Movimiento por defecto)
+
+% Si desea cambiar los colores de los diversos elementos en el tema, edite y descomente las siguientes l\'{\i}neas
+
+% Para cambiar los colores de la barra:
+%\setbeamercolor{Tesis}{fg=red!20,bg=red}
+
+% Para cambiar los colores de la estructura:
+%\setbeamercolor{structure}{fg=red}
+
+%Para cambiar el color del texto de la caja del titulo:
+%\setbeamercolor{frametitle}{fg=blue}
+
+%Para cambiar el color del texto y del fondo:
+%\definecolor{azultext}{RGB}{43,93,156}
+
+%-------------------------------------------------------
+% Definiendo y redefiniendo comandos y entornos
+%-------------------------------------------------------
+
+% colores de los hiperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+%\setbeamertemplate{headline}[text line]{\insertsectionnavigationhorizontal{\paperwidth}{}{}}
+%-------------------------------------------------------
+% Informacio\'{o}n de la p\'{a}gina del titulo
+%-------------------------------------------------------
+%%% configuracion del tema %%%%%%%%%%%%%%%%%%%5
+\makeatletter
+  \definecolor{beamer@barcolor}{RGB}{21,46,128}%azul
+  \definecolor{beamer@headercolor}{RGB}{226,107,59}%naranja
+\makeatother
+\newcommand{\cdefault}[4][named]{\begin{tikzpicture}
+\fill[#2,draw=negro] (0,0) rectangle ++(2,1);
+\node[below] at (1,0) {#2};
+\node[below=4mm] at (1,0) {\tiny #3 \{#4\}};
+\node[below=6mm] at (1,0) {\tiny #1};
+\end{tikzpicture}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox\terminalbox
+\lstnewenvironment{terminal}[1][]
+  {\lstset{#1}\setbox\terminalbox=\vbox\bgroup\hsize=0.7\textwidth}
+  {\egroup
+   \tikzstyle{terminal} = [
+    draw=white, text=white, font=courier, fill=blue!20, very thick,
+    rectangle, inner sep=10pt, inner ysep=20pt
+   ]
+   \tikzstyle{terminalTitle} = [
+     fill=red!20, text=white, font=\ttfamily, draw=white
+   ]
+   \begin{tikzpicture}
+   \node [terminal] (box){\usebox{\terminalbox}};
+   \node[terminalTitle, rounded corners, right=10pt] at (box.north west) {tty: /bin/bash};
+   \end{tikzpicture}
+}
+%%%%%%%%%%------------------------------------%%%%%%%%%%
+\newenvironment{slides}[1]
+{\begin{frame}[fragile,allowframebreaks, environment=slides]{#1}}
+{\end{frame}}
+
+%%%%%%%%%%%-------------------------------%%%%%%%%%%%%%%
+%------------------------------------
+\titulogrado{Mag\'{\i}ster}
+\director{Dr: Jorge Rodr\'{\i}guez\\ {\footnotesize email:jorge.jrodri@gmail.com}}
+\institutedirector{Universidad del Atl\'antico}
+\author[Ang\'{e}lica Arroyo]{Ang\'{e}lica Arroyo\\ {\footnotesize email: angelicarroyo1020@gmail.com}}
+\institute{Universidad del Atl\'antico}
+\title{Acotaci\'{o}n de Soluciones e Integrales de Darboux en un Sistema Particular del Circuito de Chua}
+%\subtitle{\LaTeX \ una imprenta con estilo}
+\date{Julio de 2016}
+%\subtitle{Linguistics as a Window for Understanding the Brain}
+%\titlegraphic{\includegraphics[width=1.5cm]{donald}}
+
+%-------------------------------------------------------
+% Cuerpo de la presentaci\'{o}n
+%-------------------------------------------------------
+
+\makeatother
+
+\usepackage{babel}
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+
+\begin{document}
+\begin{frame}[plain,noframenumbering]
+\titlepage
+\end{frame}
+
+
+
+\AtBeginSubsection[]{%
+  \frame<beamer>{
+    \frametitle{\'{I}ndice}
+    \tableofcontents[currentsection,currentsubsection]
+  }
+}
+
+
+
+%\beamerdefaultoverlayspecification{<+->}
+\begin{frame}{Contenido}
+
+
+\tableofcontents{}
+
+
+
+
+\end{frame}
+
+\section{Motivaci\'{o}n}
+
+
+\subsection[Problema b\'{a}sico]{El problema b\'{a}sico que estudiamos}
+\begin{frame}{Poner t\'{\i}tulos informativos}
+
+
+\framesubtitle{Los subt\'{\i}tulos de los fotogramas son opcionales.}
+\begin{itemize}
+\item Usar Enumeraci\'{o}n{*} a discreci\'{o}n.
+
+
+\pause{}
+
+\item Usar oraciones muy cortas o frases cortas.
+
+
+\pause{}
+
+\item Estos solapados se crean usando el estilo Pausa.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Poner t\'{\i}tulos informativos }
+
+\begin{itemize}
+\item<1-> Tambi\'{e}n se pueden usar estas especificaciones para crear solapados
+\item<3-> Esto permite presentar cosas en cualquier orden
+\item<2-> \'{E}sta se muestra en segundo lugar
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Poner t\'{\i}tulos informativos}
+
+\begin{block}<1->{}
+
+\begin{itemize}
+\item Bloque sin t\'{\i}tulo.
+\item Mostrado en todas las diapositivas.
+\end{itemize}
+\end{block}
+\begin{exampleblock}<2->{T\'{\i}tulo de alg\'{u}n Bloque de ejemplo}
+
+\begin{itemize}
+\item $e^{i\pi}=-1$.
+\item $e^{i\pi/2}=i$.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\subsection{Trabajo previo}
+\begin{frame}{Poner t\'{\i}tulos informativos}
+
+
+
+\begin{example}<1->
+En la primera diapositiva.
+\end{example}
+
+
+
+\begin{example}<2->
+En la segunda diapositiva.
+\end{example}
+
+\end{frame}
+
+\section{Nuestros resultados/Contribuci\'{o}n}
+
+
+\subsection{Resultados principales}
+\begin{frame}{Poner t\'{\i}tulos informativos}
+
+\begin{theorem}
+En la primera diapositiva.
+\end{theorem}
+
+
+\pause{}
+\begin{corollary}
+En la segunda diapositiva.
+\end{corollary}
+
+\end{frame}
+
+\begin{frame}{Poner t\'{\i}tulos informativos }
+
+\begin{columns}[t]
+
+
+\column{5cm}
+\begin{theorem}<1->
+En la columna de la izquierda.
+\end{theorem}
+
+
+\column{5cm}
+\begin{corollary}<2->
+En la columna de la derecha.\\
+Nueva l\'{\i}nea
+\end{corollary}
+
+\end{columns}
+
+\end{frame}
+
+\subsection{Ideas b\'{a}sicas para demostraciones/implementaciones}
+
+
+\section*{Sumario}
+\begin{frame}{Sumario}
+
+\begin{itemize}
+\item El \alert{primer mensaje principal }de la exposici\'{o}n en una o dos
+l\'{\i}neas.
+\item El \alert{segundo mensaje principal} de la exposici\'{o}n en una o dos
+l\'{\i}neas.
+\item Quiz\'{a}s un \alert{tercer mensaje}, pero no m\'{a}s.
+\end{itemize}
+
+
+
+
+\medskip{}
+
+\begin{itemize}
+\item Perspectiva
+
+\begin{itemize}
+\item Lo que no hemos hecho todav\'{\i}a.
+\item Otras cosas pendientes.
+\end{itemize}
+\end{itemize}
+\end{frame}
+\appendix
+
+\section*{Ap\'{e}ndice}
+
+
+\subsection*{Lecturas complementarias}
+\begin{frame}[allowframebreaks]{Lecturas complementarias}
+
+
+\beamertemplatebookbibitems
+\begin{thebibliography}{1}
+\bibitem{Autor1990}A. Autor. \newblock\emph{Manual de Lo que sea}.\newblock
+Editorial, 1990.\beamertemplatearticlebibitems
+
+\bibitem{Alguien2002}S. Alguien.\newblock Sobre esto y aquello\emph{.}
+\newblock\emph{Revista Esto y Aquello}. 2(1):50--100, 2000.\end{thebibliography}
+\end{frame}
+
+\end{document}

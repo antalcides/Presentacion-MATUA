@@ -1,0 +1,232 @@
+\batchmode
+\makeatletter
+\def\input@path{{style/}{sections/}{pdf/}{logos/}}
+\makeatother
+\documentclass[]{beamer}
+
+
+%-------------------------------------------------------
+% Inclusi\'{o}n de paquetes
+%-------------------------------------------------------
+%\setbeamertemplate{frametitle continuation}{\frametitle{\color{white}Title}}
+%\usepackage{lipsum-es}
+%\usepackage[latin9]{inputenc}
+%\usepackage[ansinew]{inputenc}
+%--------------------------------
+%
+\usepackage{ifthen}
+\usepackage[T1]{fontenc}
+\usepackage[mathletters]{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,spanish,es-tabla]{babel}
+\uselanguage{spanish}
+\languagepath{spanish}
+\usepackage{environ}
+\usepackage{lmodern}
+\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+%\usepackage[spanish]{babel}
+\usepackage{times}
+
+
+
+%---------------------------------
+\usepackage{amssymb,amsfonts,latexsym,cancel,stmaryrd}%
+\usepackage[ruled,,vlined,lined,linesnumbered]{algorithm2e}
+\usepackage{framed}
+\usepackage{mathptmx}
+\usepackage{helvet}
+%\linespread{1.05}
+\usepackage[full]{textcomp}                        % Caracteres especiales como ' (recto)
+\usepackage{amsmath}
+\makeatletter
+\let\@tmp\@xfloat
+\usepackage{fixltx2e}
+\let\@xfloat\@tmp
+\makeatother
+\makeatletter
+\let\th@plain\relax
+\makeatother
+\theoremstyle{plain}
+\let\openbox\relax
+%\usepackage{ntheorem}
+\let\proofname\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+%\usepackage{ddot}
+%\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{epsfig}
+%\usepackage{amscd}
+\usepackage{longtable}
+%\usepackage{latexcad}
+\usepackage{fancybox}
+\graphicspath{{ps/}{logos/}{figuras/}{sections/Figures/}}
+\listfiles
+% COMANDOS PERSONALES   ----------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\raya}{\rule{2cm}{0.01cm}\\}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\sen}{\mathop{\rm sen}\nolimits}
+\newcommand{\senh}{\mathop{\rm senh}\nolimits}
+\newcommand{\arcsen}{\mathop{\rm arcsen}\nolimits}
+\newcommand{\arcsec}{\mathop{\rm arcsec}\nolimits}
+%\def\sen{\mathop{\mbox{\normalfont sen}}\nolimits}
+\def\max{\mathop{\mbox{\normalfont m\’ax}}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+%----------- cargando el Tema Tesis
+\DeclareGraphicsExtensions{.eps,.jpg,.png, .bmp}
+
+
+\usetheme[]{Tesis}%%% opci\'{o}n para el tema outher.
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (Movimiento por defecto)
+
+% Si desea cambiar los colores de los diversos elementos en el tema, edite y descomente las siguientes l\'{\i}neas
+
+% Para cambiar los colores de la barra:
+%\setbeamercolor{Tesis}{fg=red!20,bg=red}
+
+% Para cambiar los colores de la estructura:
+%\setbeamercolor{structure}{fg=red}
+
+%Para cambiar el color del texto de la caja del titulo:
+%\setbeamercolor{frametitle}{fg=blue}
+
+%Para cambiar el color del texto y del fondo:
+%\definecolor{azultext}{RGB}{43,93,156}
+
+%-------------------------------------------------------
+% Definiendo y redefiniendo comandos y entornos
+%-------------------------------------------------------
+
+% colores de los hiperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+%\setbeamertemplate{headline}[text line]{\insertsectionnavigationhorizontal{\paperwidth}{}{}}
+%-------------------------------------------------------
+% Informacio\'{o}n de la p\'{a}gina del titulo
+%-------------------------------------------------------
+%%% configuracion del tema %%%%%%%%%%%%%%%%%%%5
+\makeatletter
+  \definecolor{beamer@barcolor}{RGB}{21,46,128}%azul
+  \definecolor{beamer@headercolor}{RGB}{226,107,59}%naranja
+\makeatother
+\newcommand{\cdefault}[4][named]{\begin{tikzpicture}
+\fill[#2,draw=negro] (0,0) rectangle ++(2,1);
+\node[below] at (1,0) {#2};
+\node[below=4mm] at (1,0) {\tiny #3 \{#4\}};
+\node[below=6mm] at (1,0) {\tiny #1};
+\end{tikzpicture}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox\terminalbox
+\lstnewenvironment{terminal}[1][]
+  {\lstset{#1}\setbox\terminalbox=\vbox\bgroup\hsize=0.7\textwidth}
+  {\egroup
+   \tikzstyle{terminal} = [
+    draw=white, text=white, font=courier, fill=blue!20, very thick,
+    rectangle, inner sep=10pt, inner ysep=20pt
+   ]
+   \tikzstyle{terminalTitle} = [
+     fill=red!20, text=white, font=\ttfamily, draw=white
+   ]
+   \begin{tikzpicture}
+   \node [terminal] (box){\usebox{\terminalbox}};
+   \node[terminalTitle, rounded corners, right=10pt] at (box.north west) {tty: /bin/bash};
+   \end{tikzpicture}
+}
+%%%%%%%%%%------------------------------------%%%%%%%%%%
+\newenvironment{slides}[1]
+{\begin{frame}[fragile,allowframebreaks, environment=slides]{#1}}
+{\end{frame}}
+
+%%%%%%%%%%%-------------------------------%%%%%%%%%%%%%%
+%------------------------------------
+\titulogrado{Magister}
+\director{\footnotesize Dr: Jorge Rodr\'{\i}guez\\ {\footnotesize jorge.jrodri@gmail.com}}
+\institutedirector{Universidad del Atl\'antico}
+\author[Ang\'{e}lica Arroyo]{Ang\'{e}lica Arroyo\\ {\footnotesize angelicarroyo1020@gmail.com}}
+\institute{Universidad del Atl\'antico}
+\title{Acotaci\'{o}n de Soluciones e Integrales de Darboux en un }
+\subtitle{\Huge  Sistema Particular del Circuito de Chua}
+\date{Julio 2016}
+%\subtitle{Linguistics as a Window for Understanding the Brain}
+\titlegraphic{\includegraphics[scale=0.16]{2}}
+
+%-------------------------------------------------------
+% Cuerpo de la presentaci\'{o}n
+%-------------------------------------------------------
+
+\begin{document}
+%-------------------------------------------------------
+% La p\'{a}gina del t\'{\i}tulo
+%-------------------------------------------------------
+
+
+\begin{frame}[plain,noframenumbering] % la opci\'{o}n plain elimina la cabecera de la p\'{a}gina de t\'{\i}tulo, noframenumbering quita la numeraci\'{o}n unicamente de esta diapositiva
+  \titlepage % coloca aqu\'{\i}  la informaci\'{o}n de la p\'{a}gina que se estipul\'{o} antes.
+\end{frame}
+
+
+\begin{frame}{Contenido}{}
+\tableofcontents
+\end{frame}
+
+\section{Planteamiento del problema}
+\begin{slides}{Planteamiento del problema}
+Planteamiento del problema....
+\end{slides}
+\section{ Marco te\'orico}
+\begin{slides}{Marco te\'orico}
+Resumen del marco teorico....
+\end{slides}
+\section{ Metodolog\'ia}
+\begin{slides}{Metodolog\'{\i}a}
+Metodolog\'{\i}a...
+\end{slides}
+\section{Resultados y Discusi\'on}
+\begin{slides}{Resultados y discusi\'{o}n}
+Resultados....
+\end{slides}
+\section{Conclusiones}
+\begin{slides}{Conclusiones}
+Conclusiones....
+\end{slides}
+\section{Recomendaciones}
+\begin{slides}{Recomendaciones}
+Recomendaciones....
+\end{slides}
+\section{Bibliograf\'{\i}a citada}
+\begin{frame}{Material de referencia }
+
+  \begin{thebibliography}{10}
+
+    \bibitem[Kern, 2007]{Kern07}
+    Uwe Kern.
+    \newblock {\em Extending \LaTeX{}'s color facilities: The {\tt xcolor}
+      package}, January 2007.
+
+    \bibitem{Matthias10}
+    Andreas Matthias.
+    \newblock {\em {The pdfpages Package}}, December 2010.
+        \bibitem[Tantau, 2008]{Tantau08}
+    Till Tantau.
+    \newblock {\em {The TikZ and PGF Packages. Manual for version 2.00.}}
+    \newblock Institut f\"{u}r Theoretische Informatik, Universit\"{a}t zu
+      L\"{u}beck, February 2008.
+
+
+
+  \end{thebibliography}
+
+\end{frame}
+
+\end{document} 

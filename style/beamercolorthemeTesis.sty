@@ -1,0 +1,143 @@
+% This is the main beamer theme file of the Tesis theme.
+% Copyright (c) 2015 by Antalcides Olivo <antalcides@outlook.com >
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+% This program is based on the theme designed by Lilyana Vankova <lilqna.v@gmail.com> in 2014 called Feather
+
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeTesis}[2015/06/06 v1.0.0 The Tesis Beamer Theme]
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definiciones y opciones del tema
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% especificando la opción Beamer
+
+               \mode<presentation>%escogiendo el modo Beamer (beamer,handout,second and trans). no está activo el modo article
+{
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% colores
+%% definiendo los colores
+              % \definecolor{beamer@barcolor}{RGB}{21,46,128}%naranja
+               %\definecolor{beamer@headercolor}{RGB}{226,107,59}%azul
+               \definecolor{beamer@headercolor}{RGB}{21,46,128}%naranja
+               \definecolor{beamer@barcolor}{RGB}{226,107,59}%azul
+               \definecolor{lightblue}{RGB}{194,193,204}% light blue
+               \definecolor{beamer@normaltextcolor}{RGB}{84,97,110}% gray blue
+               \definecolor{darkblue}{rgb}{0,0.41,0.54} % dark blue
+               %%%-----------otros colores---------
+               \definecolor{colortitulo}{RGB}{219,68,14} % 
+    \definecolor{colordominante}{RGB}{243,102,25}
+    \definecolor{colordominanteF}{RGB}{219,68,14}
+    \definecolor{colordominanteD}{RGB}{137,46,55}
+    \definecolor{mostaza}{RGB}{231,196,25}
+    \definecolor{amarilloM}{RGB}{248,199,90}
+    \definecolor{amarilloD}{RGB}{251,237,121}
+    \definecolor{grisamarillo}{RGB}{248,248,245} 
+    \definecolor{azulF}{rgb}{.0,.0,.3}
+    \definecolor{grisD}{rgb}{.3,.3,.3}
+    \definecolor{grisF}{rgb}{.6,.6,.6}
+    \definecolor{miverde}{RGB}{44,162,67}
+    \newcommand{\verde}{\color{miverde}}
+    \definecolor{naranjaua}{RGB}{226,107,59}
+    \definecolor{azulua}{RGB}{21,46,128}
+%    \definecolor{ptcbackground}{RGB}{212,237,252}
+%    \definecolor{ptctitle}{RGB}{0,177,235}
+    
+    %%%%%%%%---------- mi paleta de colores -------
+    \definecolor{est1}{RGB}{0,177,235}
+\definecolor{est2}{RGB}{0,119,158}
+\definecolor{est3}{RGB}{235,137,0}
+\definecolor{est4}{RGB}{158,66,0}
+\definecolor{est5}{RGB}{20,20,20}
+\definecolor{est6}{RGB}{235,235,235}
+\definecolor{naranja1}{rgb}{1,0.5,0}
+\definecolor{naranja2}{RGB}{255,127,0}
+\definecolor{naranja3}{cmyk}{0,0.5,1,0}
+\definecolor{naranja4}{HTML}{FF7F00}
+%rgb
+\definecolor{rojo}{rgb}{1,0,0}
+\definecolor{verde}{rgb}{0,1,0}
+\definecolor{azul}{rgb}{0,0,1}
+%cmyk
+\definecolor{blanco}{cmyk}{0,0,0,0}
+\definecolor{cian}{cmyk}{1,0,0,0}
+\definecolor{magenta}{cmyk}{0,1,0,0}
+\definecolor{amarillo}{cmyk}{0,0,1,0}
+\definecolor{negro}{cmyk}{0,0,0,1}
+\definecolor{theblue}{rgb}{0.02,0.04,0.48}
+\definecolor{thered}{rgb}{0.65,0.04,0.07}
+\definecolor{thegreen}{rgb}{0.06,0.44,0.08}
+\definecolor{thegrey}{gray}{0.5}
+\definecolor{theshade}{gray}{0.94}
+\definecolor{theframe}{gray}{0.75}
+\definecolor{burl}{rgb}{0.27,0.22,0.20}
+\definecolor{caper}{rgb}{0.36,0.46,0.23}
+\definecolor{rhodo}{rgb}{0.58,0.63,0.45}
+\definecolor{wood}{rgb}{0.61,0.51,0.43}
+\definecolor{mesh}{rgb}{0.97,0.93,0.81}
+\definecolor{wood}{rgb}{0.61,0.51,0.43}
+\definecolor{warningColor}{named}{red}
+\definecolor{doc}{RGB}{0,60,110}
+\definecolor{boxheadcol}{gray}{.6}
+\definecolor{boxcol}{gray}{.9}
+\definecolor[named]{PowderBlue}{HTML}{B0E0E6}
+\definecolor[named]{MidnightBlue}{HTML}{191970}
+\definecolor{bl}{rgb}{0,0.2,0.8}
+\definecolor{shcolor}{HTML}{FDEDD0}
+\definecolor[named]{GreenTea}{HTML}{CAE8A2}
+\definecolor[named]{MilkTea}{HTML}{C5A16F}
+\definecolor[named]{SaddleBrown}{HTML}{8B4513}
+\definecolor{FrameColor}{rgb}{0.25,0.25,1.0}
+\definecolor{TitleColor}{rgb}{1.0,1.0,1.0}
+\definecolor{TFFrameColor}{HTML}{CAE8A2}
+\definecolor{TFTitleColor}{HTML}{C5A16F}
+\definecolor{secnum}{RGB}{13,151,225}
+\definecolor{ptcbackground}{RGB}{212,237,252}
+\definecolor{ptctitle}{RGB}{0,177,235}
+\definecolor{shadecolor}{RGB}{212,237,252}
+\definecolor{visgreen}{rgb}{0.733, 0.776, 0}
+\definecolor{myBGcolor}{HTML}{F6F0D6}
+\definecolor[named]{PowderBlue}{HTML}{B0E0E6}
+\definecolor[named]{MidnightBlue}{HTML}{191970}
+\definecolor{mybrown}{RGB}{128,64,0}
+\definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\definecolor{Apricot}{cmyk}{0,0.32,0.52,0}
+\definecolor{Melon}{cmyk}{0,0.46,0.50,0}
+\definecolor{RedOrange}{cmyk}{0,0.77,0.87,0}
+\definecolor{BlueViolet}{cmyk}{0.86,0.91,0,0.04}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{Sepia}{cmyk}{0,0.83,1,0.7}
+\definecolor{Tan}{cmyk}{0.14,0.42,0.56,0}
+    
+    %%%%%%%--------------------------------------%%%%%%%%%%%%%%
+
+
+%% activando los colores definidos anteriormente
+
+               \setbeamercolor{structure}{fg=beamer@headercolor}
+               \setbeamercolor{normal text}{fg=beamer@normaltextcolor}
+               \setbeamercolor{frametitle}{fg=white,bg=beamer@headercolor}
+               \setbeamercolor{Tesis}{fg=beamer@barcolor,bg=beamer@headercolor}
+}
+
+\mode<all>

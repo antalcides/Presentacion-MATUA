@@ -1,0 +1,298 @@
+% This is the main beamer theme file of the Tesis theme.
+% Copyright (c) 2015 by Antalcides Olivo <antalcides@outlook.com >
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+% This program is based on the theme designed by Lilyana Vankova <lilqna.v@gmail.com> in 2014 called Feather
+
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeTesis}[2015/06/06 v1.0.0 The Tesis Beamer Theme]
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definiciones y opciones del tema
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% especificando la opción Beamer
+
+
+               \mode<presentation> %activando la opcion beamer (beamer,handout,second and trans). no se puede activar la opcion article
+{
+
+%%%%%%%%%%% página de tituo para charla %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetikzlibrary{shapes,arrows}
+\setbeamerfont{autor}{size=\Huge}
+\setbeamerfont{institute}{size=\normalsize\itshape}
+\setbeamerfont{titulo}{size=\fontsize{28}{34}\bfseries}
+\setbeamerfont{subtitulo}{size=\Large\normalfont\slshape}
+
+  
+               \setbeamerfont{institute}{family=\rmfamily, size = \footnotesize}
+               \setbeamerfont{titulo}{family=\rmfamily, size = \Huge} 
+               \setbeamerfont{subtitulo}{family=\rmfamily, size = \large}
+               \setbeamerfont{autor}{family=\rmfamily, size = \normalsize}
+               \setbeamerfont{date}{family=\rmfamily, size = \footnotesize}
+\setbeamertemplate{titulo page}{%
+\begin{tikzpicture}[remember picture,overlay]
+\fill[beamer@headercolor]
+  ([yshift=15pt]current page.west) rectangle (current page.south east);
+\node[anchor=east] 
+  at ([yshift=-50pt]current page.north east) (institute)
+  {\parbox[t]{.6\paperwidth}{\raggedleft%
+    \usebeamerfont{autor}\textcolor{beamer@barcolor}{%
+    \textpdfrender{
+    TextRenderingMode=FillStroke,
+    FillColor=beamer@barcolor,
+    LineWidth=.1ex,
+    }{\insertautor}}}};
+\node[anchor=north east] 
+  at ([yshift=-70pt]current page.north east) (institute)
+  {\parbox[t]{.78\paperwidth}{\raggedleft%
+    \usebeamerfont{institute}\textcolor{gray}{\insertinstitute}}};
+\node[anchor=south west] 
+  at ([yshift=40pt,xshift=20pt]current page.west) (logo)
+  {\parbox[t]{.19\paperwidth}{\raggedleft%
+    \usebeamercolor[fg]{titlegraphic}\inserttitulographic}};
+\node[anchor=east]
+  at ([yshift=-15pt,xshift=-20pt]current page.east) (title)
+  {\parbox[t]{\textwidth}{\raggedleft%
+ \usebeamerfont{titulo}\textcolor{white}{%
+    \textpdfrender{
+    TextRenderingMode=FillStroke,
+    FillColor=white,
+    LineWidth=.1ex,
+    }{ \inserttitulo}}}};
+\node[anchor=east]
+  at ([yshift=-60pt,xshift=-20pt]current page.east) (subtitle)
+  {\parbox[t]{.6\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{beamer@barcolor}{\insertsubtitulo}}};
+\end{tikzpicture}
+}
+
+
+
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% Página del titulo para tesis
+%% definiendo las fuentes para todos los elementos
+\setbeamerfont{title}{size=\fontsize{30}{36}\bfseries}
+\setbeamerfont{subtitle}{size=\Large\normalfont\slshape}
+
+  
+               
+               \setbeamerfont{title}{family=\rmfamily, size = \Huge} 
+               \setbeamerfont{subtitle}{family=\rmfamily, size = \large}
+                   
+%   {
+
+%% activando las definiciones anteriores
+  
+
+%        \begin{minipage}[c][\textheight][c]{\textwidth}
+%
+%                  \centering
+%
+%                 {\usebeamerfont{institute}\insertinstitute}\vspace*{30pt}
+%
+%                 {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\vspace*{10pt}
+%
+%                 {\usebeamerfont{subtitle}\usebeamercolor[fg]                 {subtitle}\insertsubtitle}\vspace*{30pt}
+%
+%                 {\usebeamerfont{author}\insertauthor}\vspace*{10pt}
+%                 {\usebeamerfont{author} Director:\ \insertdirector}\vspace*{30pt}
+%                 {\usebeamerfont{date}\insertdate}\vspace*{\baselineskip}
+%
+%         \end{minipage}
+%   }
+%  
+\setbeamertemplate{title page}{%
+\begin{tikzpicture}[remember picture,overlay]
+\fill[beamer@headercolor]
+  ([yshift=15pt]current page.west) rectangle (current page.south east);
+  \node[anchor=west] at ([xshift=15pt,yshift=-15pt]current page.north west) (author){\large \setbeamercolor{postit}{fg=white,bg=beamer@barcolor}
+\begin{beamercolorbox}[sep=1em,wd=13.5cm]{postit}
+
+\centering Defensa de Tesis para Optar el T\'itulo de \inserttitulogrado 
+\end{beamercolorbox}};
+\node[anchor=west] 
+  at ([xshift=10pt,yshift=-65pt]current page.north west) (-5,0)
+{\begin{columns}
+  \column{.5\textwidth}
+    \begin{flushright}
+      \begin{minipage}{1.2cm}
+        %\includegraphics[height=1cm]{\inserttitlegraphic}
+        \inserttitlegraphic
+      \end{minipage}
+      \begin{minipage}{4cm}
+      {\usebeamerfont{author} Director:}\\
+        {\usebeamerfont{author}\insertdirector}\\
+        {\usebeamerfont{institute}\insertinstitutedirector}
+      \end{minipage}
+    \end{flushright}
+  \column{.5\textwidth}
+    \begin{center}
+      \begin{minipage}{1.2cm}
+        \includegraphics[height=1cm]{logos/2}
+      \end{minipage}
+      \begin{minipage}{4cm}
+        {\usebeamerfont{author}Candidato:}\\
+        {\usebeamerfont{author}\insertauthor}\\
+        {\usebeamerfont{institute} \insertinstitute}
+      \end{minipage}
+    \end{center}
+  \end{columns}
+                                  };
+%\node[anchor=north east] 
+%  at ([yshift=-70pt]current page.north east) (institute)
+%  {\parbox[t]{.78\paperwidth}{\raggedleft%
+%    \usebeamerfont{institute}\textcolor{gray}{\insertinstitute}}};
+\node[anchor=south west] 
+  at ([yshift=20pt]current page.west) (logo)
+  {\parbox[t]{.19\paperwidth}{\raggedleft%
+      \usebeamercolor[fg]{titlegraphic}%\inserttitlegraphic
+      }};
+\node[anchor=east]
+  at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
+  {\parbox[t]{\textwidth}{\raggedleft%
+ \usebeamerfont{author}\textcolor{white}{%
+    \textpdfrender{
+    TextRenderingMode=FillStroke,
+    FillColor=white,
+    LineWidth=.1ex,
+    }{\usebeamerfont{title}\begin{spacing}{1}\inserttitle\end{spacing}}}}};
+\node[anchor=east]
+  at ([yshift=-60pt,xshift=-20pt]current page.east) (subtitle)
+  {\parbox[t]{.6\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{beamer@barcolor}{\usebeamerfont{institute}\insertsubtitle}}};
+\end{tikzpicture}
+}
+
+%----------------------------------------------------------------------------------------------------------------------------------
+  
+% página final
+
+                  \defbeamertemplate{final page}{text}[1]
+   {
+         \begin{minipage}[c][\textheight][c]{\textwidth}
+                  \centering
+                  #1
+         \end{minipage}
+   }
+                  \newcommand{\finalpage}[1]
+   {
+                  \setbeamertemplate{final page}[text]{#1}
+                  \usebeamertemplate{final page}
+   }
+
+%----------------------------------------------------------------------------------------------------------------------------------
+  
+%% adicionando la grafica de marca de agua de la página del titulo y la página final
+%                  \newcommand{\1}
+%   {
+%                  \setbeamertemplate{background}
+%      {
+%                  \includegraphics[width=\paperwidth,height=\paperheight]{logos/1}
+%                  \tikz[overlay] \fill[fill opacity=0.80,fill=gray!10] (0,0) rectangle (-\paperwidth,\paperheight);
+%       }
+%    }
+
+%--------------------------------------------------------------------------------------------------
+% Página de título para cada sección
+\AtBeginSection{
+\setbeamercolor*{section }{fg=beamer@barcolor}
+  \begin{frame}%{Curso avanzado de Beamer}
+   \begin{structureenv}
+    \color{beamer@barcolor}
+      \Large Secci\'on \thesection\ \color{beamer@headercolor}{\rule[-.6cm]{2pt}{1.5cm}}  \color{beamer@barcolor}{\insertsection}
+    \end{structureenv}
+  \end{frame}
+}
+%----------------------------------------------------------------------------------------------
+        %%%%%%%%%%  marca de agua en todas las diapositivas--------------------------------
+        \setbeamercovered{transparent}
+        \setbeamertemplate{footline}
+{
+  \linethickness{0pt}
+  \framelatex{
+  \begin{beamercolorbox}[leftskip=.3cm,rightskip=.3cm,wd=\textwidth,ht=0.27\beamerheadheight,sep=0.1cm]{Location bar}
+    \usebeamerfont{section in head/foot}%
+    \insertshortauthor~|~\insertshorttitle
+    \hfill
+    \insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}
+}
+
+\setbeamertemplate{background}{
+
+  \parbox[c][\paperheight]{\paperwidth}{%
+%    \boldmath
+%\fontsize{125pt}{125pt}\selectfont
+
+%    \usebeamercolor{color letra fondo}
+%    \color{fg}
+
+    \vfill \hfill 
+%    $ \simbolo $
+    \begin{tikzpicture}
+      \node[opacity=.4]
+      {
+        \includegraphics[height=4cm]{logos/escudot2.png}
+      };
+    \end{tikzpicture}
+    %\hspace{-1cm}
+    \vspace*{0.5cm}
+%    \unboldmath
+  }
+} 
+  
+  %----------------------------------------------------------
+ 
+%para que utilice  números en vez de una imagen de las referencias
+%------------------------------------------------------------------------
+
+
+                  \setbeamertemplate{bibliography item}[text]
+
+}
+\newcommand{\licencia}{
+\begin{frame}
+  \frametitle{Licencia\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \includegraphics[width=2.7cm,viewport=0 0 400 103]{img/cc.png}}
+  \framesubtitle{M\'as info: \url{http://creativecommons.org/licenses/by-sa/3.0/es/}}
+\footnotesize
+
+  \begin{exampleblock}{Usted es libre de:}
+\begin{center}
+% use packages: array
+\begin{tabular}{m{0.75cm}m{7.25cm}m{1.25cm}}
+\includegraphics[width=0.75cm,viewport=0 0 50 50]{img/share.png} & copiar, distribuir y comunicar p\'ublicamente la obra & \multirow{2}{*}{\includegraphics[width=1.25cm,viewport=0 0 127 127]{img/seal.png} } \\ 
+\includegraphics[width=0.75cm,viewport=0 0 50 50]{img/remix.png} & hacer obras derivadas \\
+\end{tabular}
+\end{center}
+  \end{exampleblock}
+
+  \begin{alertblock}{Bajo las condiciones siguientes:}
+\begin{center}
+% use packages: array
+\begin{tabular}{m{0.75cm}m{9cm}}
+\includegraphics[width=0.75cm,viewport=0 0 50 50]{img/by.png} & \textbf{Reconocimiento.} Debe reconocer los cr\'editos de la obra de la manera especificada por el autor o el licenciador (pero no de una manera que sugiera que tiene su apoyo o apoyan el uso que hace de su obra). \\ 
+\includegraphics[width=0.75cm,viewport=0 0 50 50]{img/sa.png} & \textbf{Compartir bajo la misma licencia.} Si transforma o modifica esta obra para crear una obra derivada, s\'olo puede distribuir la obra resultante bajo la misma licencia, una similar o una compatible. \\ 
+\end{tabular}
+\end{center}
+  \end{alertblock}
+\end{frame}
+}
+
+
+\mode<all>
